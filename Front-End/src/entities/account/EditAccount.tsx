@@ -36,8 +36,22 @@ export const EditAccount = ({
     onClose();
   };
 
-  const handleSelectChange = (value: User.Role) => {
-    setValue("role", value);
+  const handleSelectChange = (value: string | number) => {
+    const roles: User.Role[] = ["ADMIN", "PL", "DEV", "TESTER"];
+    let role: User.Role = "PL";
+
+    // value가 Role 타입인지 확인
+    if (typeof value === "string" && (value === "ADMIN" || value === "PL" || value === "DEV" || value === "TESTER")) {
+        role = value; // 이제 role은 Role 타입입니다.
+        setValue("role", role); // role을 setValue에 전달
+    }
+    else if (typeof value === "number" && (value >= 0 && value < roles.length)){
+        role = roles[value]; // 이제 role은 Role 타입입니다.
+    }
+    else {
+        console.error("유효하지 않은 역할입니다.");
+    }
+    setValue("role", role);
   };
 
   return (
