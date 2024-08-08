@@ -4,7 +4,7 @@ import com.dongne.its.issue.web.dto.IssueResponseDto;
 
 public interface IssueBaseErrorCode {
 
-  public IssueResponseDto getReason();
+  public IssueErrorReasonDto getReason();
 
   public IssueResponseDto getReasonHttpStatus();
 
