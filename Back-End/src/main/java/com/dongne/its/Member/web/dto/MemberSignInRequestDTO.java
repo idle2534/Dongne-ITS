@@ -1,11 +1,9 @@
-package com.dongne.its.Member.web.dto;
+package com.dongne.its.member.web.dto;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
-public class MemberSignInRequestDTO {
-    private Long id;
-    private String password;
+public class MemberSignInRequestDto {
+    String signId;
+    String password;
 }

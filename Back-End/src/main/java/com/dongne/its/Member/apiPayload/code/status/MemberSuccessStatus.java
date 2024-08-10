@@ -1,7 +1,7 @@
-package com.dongne.its.Member.apiPayload.code.status;
+package com.dongne.its.member.apiPayload.code.status;
 
-import com.dongne.its.Member.apiPayload.code.MemberBaseCode;
-import com.dongne.its.Member.apiPayload.code.MemberReasonDTO;
+import com.dongne.its.member.apiPayload.code.MemberBaseCode;
+import com.dongne.its.member.apiPayload.code.MemberReasonDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -18,20 +18,20 @@ public enum MemberSuccessStatus implements MemberBaseCode {
     private final String message;
 
     @Override
-    public MemberReasonDTO getReason() {
-        return MemberReasonDTO.builder()
+    public MemberReasonDto getReason() {
+        return MemberReasonDto.builder()
                 .message(message)
                 .code(code)
-                .isSuccess(false)
+                .isSuccess(true)
                 .build();
     }
 
     @Override
-    public MemberReasonDTO getReasonHttpStatus() {
-        return MemberReasonDTO.builder()
+    public MemberReasonDto getReasonHttpStatus() {
+        return MemberReasonDto.builder()
                 .message(message)
                 .code(code)
-                .isSuccess(false)
+                .isSuccess(true)
                 .httpStatus(httpStatus)
                 .build()
                 ;

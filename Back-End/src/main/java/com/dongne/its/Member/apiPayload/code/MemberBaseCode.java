@@ -1,8 +1,8 @@
-package com.dongne.its.Member.apiPayload.code;
+package com.dongne.its.member.apiPayload.code;
 
 public interface MemberBaseCode {
 
-    public MemberReasonDTO getReason();
+    public MemberReasonDto getReason();
 
-    public MemberReasonDTO getReasonHttpStatus();
+    public MemberReasonDto getReasonHttpStatus();
 }

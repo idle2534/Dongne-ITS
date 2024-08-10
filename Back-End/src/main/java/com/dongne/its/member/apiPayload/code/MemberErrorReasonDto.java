@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberReasonDto {
+public class MemberErrorReasonDto {
     private String message;
     private String code;
     private boolean isSuccess;
