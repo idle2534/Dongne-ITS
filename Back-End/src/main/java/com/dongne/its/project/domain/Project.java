@@ -1,7 +1,7 @@
 package com.dongne.its.project.domain;
 
 import com.dongne.its.project.service.enums.Status;
-import com.dongne.its.project.service.common.BaseEntity;
+import com.dongne.its.project.service.common.ProjectBaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Project extends BaseEntity {
+public class Project extends ProjectBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
