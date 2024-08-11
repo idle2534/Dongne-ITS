@@ -19,7 +19,6 @@ public class IssueApiResponse<T> {
   private final String message;
   @JsonInclude(JsonInclude.Include.NON_NULL)
   private T result;
-
     //성공
     public static <T> IssueApiResponse<T> onSuccess(T result){
         return new IssueApiResponse<>(true, IssueSuccessStatus._OK.getCode() , IssueSuccessStatus._OK.getMessage(), result);
