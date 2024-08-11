@@ -1,4 +1,4 @@
-package com.dongne.its.base.web.dto;
+package com.dongne.its.project.web.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
