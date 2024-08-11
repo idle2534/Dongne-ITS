@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class OpenApiConfig {
 
+<<<<<<< HEAD
   @Bean
   public OpenAPI customOpenAPI() {
     return new OpenAPI()
@@ -16,4 +17,14 @@ public class OpenApiConfig {
             .version("1.0")
             .description("API documentation for the application"));
   }
+=======
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("API Documentation")
+                        .version("1.0")
+                        .description("API documentation for the application"));
+    }
+>>>>>>> 9e77857f369dbe39e82c7bf9f18aa2ff8fc81e7c
 }
