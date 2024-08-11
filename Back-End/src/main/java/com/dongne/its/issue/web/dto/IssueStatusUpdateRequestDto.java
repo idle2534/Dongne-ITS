@@ -6,5 +6,4 @@ import lombok.Getter;
 public class IssueStatusUpdateRequestDto {
   private Long issueId;
   private String status;  //enum
-
 }

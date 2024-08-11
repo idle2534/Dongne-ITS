@@ -1,5 +1,6 @@
-package com.dongne.its.member.web.dto;
+package com.dongne.its.comment.web.dto;
 
+import com.dongne.its.member.web.dto.MemberResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,10 +10,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberResponseDto {
+public class CommentResponseDto {
     private Long id;
-    private String role;
-    private String name;
-    private String signId;
+    private MemberResponseDto writer;
+    private String content;
     private Boolean isDeleted;
 }

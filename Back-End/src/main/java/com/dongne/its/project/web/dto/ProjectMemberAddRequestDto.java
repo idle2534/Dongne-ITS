@@ -4,5 +4,5 @@ import lombok.Getter;
 
 @Getter
 public class ProjectMemberAddRequestDto {
-    int addMemberId;
+    private Long addMemberId;
 }

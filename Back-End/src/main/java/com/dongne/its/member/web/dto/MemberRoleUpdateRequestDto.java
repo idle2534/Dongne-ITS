@@ -4,6 +4,6 @@ import lombok.Getter;
 
 @Getter
 public class MemberRoleUpdateRequestDto {
-    Long id;
-    String role;
+    private Long id;
+    private String role;
 }

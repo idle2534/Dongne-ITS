@@ -1,9 +1,13 @@
 package com.dongne.its.issue.web.dto;
 
+import com.dongne.its.comment.web.dto.CommentResponseDto;
+import com.dongne.its.member.web.dto.MemberResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Builder
 @Getter
@@ -15,12 +19,12 @@ public class IssueResponseDto {
   private String description;
   private String priority;  //enum
   private String status;  //enum
+  private MemberResponseDto reporter;
   private String reportedDate;  //date-time
+  private MemberResponseDto fixer;
+  private MemberResponseDto assignee;
   private Long projectId;
   private String category;
-<<<<<<< HEAD
-  private boolean isDeleted;
-=======
-  private boolean idDeleted;
->>>>>>> 9ace679e12894bb5f386cd28c28d9ad87ca67487
+  private List<CommentResponseDto> comments;
+  private Boolean idDeleted;
 }

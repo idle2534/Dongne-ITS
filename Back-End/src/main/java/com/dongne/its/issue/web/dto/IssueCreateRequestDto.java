@@ -4,7 +4,6 @@ import lombok.Getter;
 
 @Getter
 public class IssueCreateRequestDto {
-
   private String title;
   private String description;
   private Long projectId;

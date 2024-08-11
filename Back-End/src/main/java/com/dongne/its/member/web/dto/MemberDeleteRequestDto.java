@@ -4,5 +4,5 @@ import lombok.Getter;
 
 @Getter
 public class MemberDeleteRequestDto {
-    Long id;
+    private Long id;
 }
