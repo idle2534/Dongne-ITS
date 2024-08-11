@@ -1,14 +1,14 @@
-package com.dongne.its.member.apiPayload.code.status;
+package com.dongne.its.base.apiPayload.code.status;
 
-import com.dongne.its.member.apiPayload.code.MemberBaseCode;
-import com.dongne.its.member.apiPayload.code.MemberReasonDto;
+import com.dongne.its.base.apiPayload.code.BaseCode;
+import com.dongne.its.base.apiPayload.code.ReasonDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 @Getter
 @AllArgsConstructor
-public enum MemberSuccessStatus implements MemberBaseCode {
+public enum SuccessStatus implements BaseCode {
     // 가장 일반적인 응답
     _OK(HttpStatus.OK, "COMMON200", "성공"),
     _CREATED(HttpStatus.CREATED, "COMMON201", "새로운 리소스 생성");
@@ -18,8 +18,8 @@ public enum MemberSuccessStatus implements MemberBaseCode {
     private final String message;
 
     @Override
-    public MemberReasonDto getReason() {
-        return MemberReasonDto.builder()
+    public ReasonDto getReason() {
+        return ReasonDto.builder()
                 .message(message)
                 .code(code)
                 .isSuccess(true)
@@ -27,8 +27,8 @@ public enum MemberSuccessStatus implements MemberBaseCode {
     }
 
     @Override
-    public MemberReasonDto getReasonHttpStatus() {
-        return MemberReasonDto.builder()
+    public ReasonDto getReasonHttpStatus() {
+        return ReasonDto.builder()
                 .message(message)
                 .code(code)
                 .isSuccess(true)

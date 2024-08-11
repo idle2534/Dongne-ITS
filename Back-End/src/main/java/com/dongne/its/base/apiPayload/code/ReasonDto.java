@@ -1,4 +1,4 @@
-package com.dongne.its.member.apiPayload.code;
+package com.dongne.its.base.apiPayload.code;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberReasonDto {
+public class ReasonDto {
     private String message;
     private String code;
     private boolean isSuccess;

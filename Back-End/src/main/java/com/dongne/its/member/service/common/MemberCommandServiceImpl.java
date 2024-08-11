@@ -1,7 +1,7 @@
 package com.dongne.its.member.service.common;
 
-import com.dongne.its.member.apiPayload.code.status.MemberErrorStatus;
-import com.dongne.its.member.apiPayload.exception.handler.MemberHandler;
+import com.dongne.its.base.apiPayload.code.status.ErrorStatus;
+import com.dongne.its.base.apiPayload.exception.handler.GeneralExceptionHandler;
 import com.dongne.its.member.converter.MemberConverter;
 import com.dongne.its.member.domain.Member;
 import com.dongne.its.member.repository.MemberRepository;
@@ -22,7 +22,7 @@ public class MemberCommandServiceImpl implements MemberCommandService {
     @Override
     public void checkRole(Member member, Role role) {
         if (member.getRole() != role)
-            throw new MemberHandler(MemberErrorStatus.PERMISSION_DENY);
+            throw new GeneralExceptionHandler(ErrorStatus.PERMISSION_DENY);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class MemberCommandServiceImpl implements MemberCommandService {
             return member;
         }
         else{
-            throw new MemberHandler(MemberErrorStatus._BAD_REQUEST);
+            throw new GeneralExceptionHandler(ErrorStatus._BAD_REQUEST);
         }
     }
 
