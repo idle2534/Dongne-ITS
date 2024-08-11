@@ -33,11 +33,11 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-def frontendDir = "C:/Users/jihuu/Dongne-ITS/Front-End" // def frontendDir = "$projectDir/src/main/frontend"
+def frontendDir = "$projectDir/../Front-End" // def frontendDir = "$projectDir/src/main/frontend"
 
 sourceSets {
 	main {
-		resources { srcDirs = ["$projectDir/src/main/resources", frontendDir]
+		resources { srcDirs = ["$projectDir/src/main/resources"]
 		}
 	}
 }
