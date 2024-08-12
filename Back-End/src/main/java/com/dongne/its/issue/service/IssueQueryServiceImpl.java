@@ -1,4 +1,4 @@
-package com.dongne.its.issue.service.common;
+package com.dongne.its.issue.service;
 
 import com.dongne.its.issue.apiPayload.code.status.IssueErrorStatus;
 import com.dongne.its.issue.apiPayload.exception.handler.IssueHandler;

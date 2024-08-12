@@ -1,4 +1,4 @@
-package com.dongne.its.member.service.common;
+package com.dongne.its.member.service;
 
 import com.dongne.its.member.domain.Member;
 import com.dongne.its.member.repository.MemberRepository;

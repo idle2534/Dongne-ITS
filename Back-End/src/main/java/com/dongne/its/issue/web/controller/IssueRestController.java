@@ -1,8 +1,8 @@
-package com.dongne.its.issue.controller;
+package com.dongne.its.issue.web.controller;
 
 import com.dongne.its.issue.apiPayload.IssueApiResponse;
 import com.dongne.its.issue.converter.IssueErrorConverter;
-import com.dongne.its.issue.service.common.IssueQueryService;
+import com.dongne.its.issue.service.IssueQueryService;
 import com.dongne.its.issue.web.dto.IssueExceptionDto;
 import com.dongne.its.issue.web.dto.IssueResponseDto;
 import lombok.RequiredArgsConstructor;

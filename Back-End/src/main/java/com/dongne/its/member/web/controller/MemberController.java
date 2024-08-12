@@ -1,9 +1,9 @@
-package com.dongne.its.member.controller;
+package com.dongne.its.member.web.controller;
 
 import com.dongne.its.member.converter.MemberConverter;
 import com.dongne.its.member.domain.Member;
-import com.dongne.its.member.service.common.MemberCommandService;
-import com.dongne.its.member.service.common.MemberQueryService;
+import com.dongne.its.member.service.MemberCommandService;
+import com.dongne.its.member.service.MemberQueryService;
 import com.dongne.its.member.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

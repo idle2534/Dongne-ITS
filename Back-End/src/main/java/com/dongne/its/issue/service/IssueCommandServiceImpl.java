@@ -1,4 +1,4 @@
-package com.dongne.its.issue.service.common;
+package com.dongne.its.issue.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

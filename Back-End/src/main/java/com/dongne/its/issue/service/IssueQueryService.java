@@ -1,4 +1,4 @@
-package com.dongne.its.issue.service.common;
+package com.dongne.its.issue.service;
 
 public interface IssueQueryService {
 

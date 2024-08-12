@@ -1,7 +1,7 @@
 package com.dongne.its.member.converter;
 
 import com.dongne.its.member.domain.Member;
-import com.dongne.its.member.service.enums.Role;
+import com.dongne.its.member.domain.enums.Role;
 import com.dongne.its.member.web.dto.MemberResponseDto;
 import com.dongne.its.member.web.dto.MemberSignUpRequestDto;
 

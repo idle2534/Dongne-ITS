@@ -1,7 +1,7 @@
-package com.dongne.its.member.service.common;
+package com.dongne.its.member.service;
 
 import com.dongne.its.member.domain.Member;
-import com.dongne.its.member.service.enums.Role;
+import com.dongne.its.member.domain.enums.Role;
 import com.dongne.its.member.web.dto.MemberDeleteRequestDto;
 import com.dongne.its.member.web.dto.MemberRoleUpdateRequestDto;
 import com.dongne.its.member.web.dto.MemberSignInRequestDto;
