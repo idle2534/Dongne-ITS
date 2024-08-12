@@ -1,8 +1,10 @@
 package com.dongne.its.issue.domain;
 
-import com.dongne.its.issue.domain.common.BaseEntity;
+import com.dongne.its.base.domain.common.BaseEntity;
 import com.dongne.its.issue.domain.enums.Priority;
 import com.dongne.its.issue.domain.enums.Status;
+import com.dongne.its.member.domain.Member;
+import com.dongne.its.project.domain.Project;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

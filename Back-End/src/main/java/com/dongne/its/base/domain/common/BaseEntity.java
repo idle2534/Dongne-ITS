@@ -1,4 +1,4 @@
-package com.dongne.its.base.domain;
+package com.dongne.its.base.domain.common;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
@@ -24,6 +24,7 @@ public abstract class BaseEntity {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
     @LastModifiedBy

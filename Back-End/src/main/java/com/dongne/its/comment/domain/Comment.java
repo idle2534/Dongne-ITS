@@ -1,8 +1,9 @@
-package com.dongne.its.issue.domain.mapping;
+package com.dongne.its.comment.domain;
 
-import com.dongne.its.issue.domain.Member;
-import com.dongne.its.issue.domain.Project;
-import com.dongne.its.issue.domain.common.BaseEntity;
+import com.dongne.its.base.domain.common.BaseEntity;
+import com.dongne.its.issue.domain.Issue;
+import com.dongne.its.member.domain.Member;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -21,17 +22,22 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Project_members extends BaseEntity {
-
+public class Comment extends BaseEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "projectId")
-  private Project projectId;
+  @Column(length = 1000)
+  private String content;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "memberId")
-  private Member memberId;
+  @JoinColumn(name = "writer")
+  private Member writer;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "issueId")
+  private Issue issueId;
+
+  @Column()
+  private boolean isDeleted;
 }

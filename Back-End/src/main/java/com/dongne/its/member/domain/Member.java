@@ -1,7 +1,8 @@
 package com.dongne.its.member.domain;
 
 
-import com.dongne.its.member.service.enums.Role;
+import com.dongne.its.base.domain.common.BaseEntity;
+import com.dongne.its.member.domain.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,7 +12,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member {
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
