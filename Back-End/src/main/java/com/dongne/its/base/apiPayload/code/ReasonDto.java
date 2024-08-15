@@ -11,8 +11,7 @@ import org.springframework.http.HttpStatus;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReasonDto {
+    private Integer code;
     private String message;
-    private String code;
-    private boolean isSuccess;
     private HttpStatus httpStatus;
 }

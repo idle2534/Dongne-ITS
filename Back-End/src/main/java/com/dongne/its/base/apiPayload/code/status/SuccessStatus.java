@@ -10,11 +10,11 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum SuccessStatus implements BaseCode {
     // 가장 일반적인 응답
-    _OK(HttpStatus.OK, "COMMON200", "성공"),
-    _CREATED(HttpStatus.CREATED, "COMMON201", "새로운 리소스 생성");
+    _OK(HttpStatus.OK, 200, "성공"),
+    _CREATED(HttpStatus.CREATED, 201, "새로운 리소스 생성");
 
     private final HttpStatus httpStatus;
-    private final String code;
+    private final Integer code;
     private final String message;
 
     @Override
@@ -22,7 +22,6 @@ public enum SuccessStatus implements BaseCode {
         return ReasonDto.builder()
                 .message(message)
                 .code(code)
-                .isSuccess(true)
                 .build();
     }
 
@@ -31,9 +30,7 @@ public enum SuccessStatus implements BaseCode {
         return ReasonDto.builder()
                 .message(message)
                 .code(code)
-                .isSuccess(true)
                 .httpStatus(httpStatus)
-                .build()
-                ;
+                .build();
     }
 }
