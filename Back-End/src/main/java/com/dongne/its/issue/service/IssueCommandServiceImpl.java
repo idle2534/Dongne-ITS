@@ -35,31 +35,46 @@ public class IssueCommandServiceImpl implements IssueCommandService{
 
   @Override
   public Issue updateIssueDev(IssueStatusUpdateRequestDto request) {
-    return null;
+    Issue issue = issueRepository.findById(request.getIssueId()).orElseThrow();
+    issue.setStatus(Status.valueOf(request.getStatus()));
+    return issueRepository.save(issue);
   }
 
   @Override
   public Issue reassign(IssueAssignRequestDto request) {
-    return null;
+    Issue issue = issueRepository.findById(request.getIssueId()).orElseThrow();
+    issue.setAssignee(issueRepository.findById(request.getAssigneeId()).orElseThrow().getAssignee());
+    return issueRepository.save(issue);
   }
 
   @Override
   public Issue deleteRequest(IssueDeleteRequestDto request) {
-    return null;
+    Issue issue = issueRepository.findById(request.getIssueId()).orElseThrow();
+    issue.setDeleted(true);
+    return issueRepository.save(issue);
   }
 
   @Override
   public Issue delete(IssueDeleteRequestDto request) {
-    return null;
+    Issue issue = issueRepository.findById(request.getIssueId()).orElseThrow();
+    issue.setDeleted(true);
+    return issueRepository.save(issue);
   }
 
   @Override
   public Issue assign(IssueAssignRequestDto request) {
+
     return null;
   }
 
   @Override
   public Issue create(IssueCreateRequestDto request) {
-    return null;
+    Issue issue = Issue.builder()
+            .title(request.getTitle())
+            .description(request.getDescription())
+            .projectId(request.getProjectId())
+            .category(request.getCategory())
+            .build();
+    return issueRepository.save(issue);
   }
 }
