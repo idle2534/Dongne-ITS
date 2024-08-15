@@ -24,12 +24,12 @@ public class MemberQueryServiceImpl implements  MemberQueryService{
     }
 
     @Override
-    public List<Member> findMembersByIdAndProjectId(Long id, Long projectId) {
-        return null;
+    public List<Member> findMembersByProjectId(Long projectId) {
+        return memberRepository.findByProjectId(projectId);
     }
 
     @Override
-    public List<Member> findMembersByIdAndProjectIdAndRole(Long id, Long projectId, String role) {
-        return null;
+    public List<Member> findMembersByProjectIdAndRole(Long projectId, String role) {
+        return memberRepository.findByProjectIdAndRole(projectId, role);
     }
 }

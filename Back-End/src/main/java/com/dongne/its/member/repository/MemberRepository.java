@@ -12,16 +12,19 @@ import java.util.Optional;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
-    @Query("select u from Member u where u.id = :id and u.isDeleted = false")
+    @Query("select m from Member m where m.id = :id and m.isDeleted = false")
     public Optional<Member> findMemberById(@Param("id") Long id);
 
-    @Query("select u from Member u where u.signId = :signId and u.isDeleted = false")
+    @Query("select m from Member m where m.signId = :signId and m.isDeleted = false")
     public Optional<Member> findMemberBySignId(@Param("signId") String signId);
 
-    @Query("select u from Member u where u.role != 'ADMIN' and u.isDeleted = false")
+    @Query("select m from Member m where m.role != 'ADMIN' and m.isDeleted = false")
     public List<Member> findAllMembers();
 
-    //public List<Member> findByIdAndProjectId(Long memberId, Long projectId);
+    // @Query("SELECT m FROM Member m JOIN Project_members pm ON m.id = pm.member.id WHERE pm.project.id = :projectId ")
+    @Query("SELECT pm.member FROM Project_members pm WHERE pm.project.id = :projectId")
+    public List<Member> findByProjectId(@Param("projectId") Long projectId);
 
-    //public List<Member> findByIdAndProjectIdAndRole(Long memberId, Long projectId, String role);
+    @Query("SELECT pm.member FROM Project_members pm WHERE pm.project.id = :projectId AND pm.member.role = :role")
+    public List<Member> findByProjectIdAndRole(@Param("projectId") Long projectId, @Param("role") String role);
 }
