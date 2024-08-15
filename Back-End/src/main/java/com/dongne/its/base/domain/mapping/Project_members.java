@@ -28,10 +28,10 @@ public class Project_members extends BaseEntity {
   private Long id;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "projectId")
-  private Project projectId;
+  @JoinColumn(name = "project_id")
+  private Project project;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "memberId")
-  private Member memberId;
+  @JoinColumn(name = "member_id")
+  private Member member;
 }

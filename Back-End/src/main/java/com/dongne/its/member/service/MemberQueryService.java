@@ -10,7 +10,7 @@ public interface MemberQueryService {
 
     public List<Member> findMembers();
 
-    public List<Member> findMembersByIdAndProjectId(Long id, Long projectId);
+    public List<Member> findMembersByProjectId(Long projectId);
 
-    public List<Member> findMembersByIdAndProjectIdAndRole(Long id, Long projectId, String role);
+    public List<Member> findMembersByProjectIdAndRole(Long projectId, String role);
 }
