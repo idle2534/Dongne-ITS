@@ -26,6 +26,12 @@ public class MemberCommandServiceImpl implements MemberCommandService {
     }
 
     @Override
+    public void checkPermissoion(Member member, Role role) {
+        if(member.getRole().ordinal() < role.ordinal())
+            throw new GeneralExceptionHandler(ErrorStatus.PERMISSION_DENY);
+    }
+
+    @Override
     public Member updateRole(MemberRoleUpdateRequestDto request) {
         Member member = memberRepository.findById(request.getId()).orElseThrow();
         member.setRole(Role.valueOf(request.getRole()));
