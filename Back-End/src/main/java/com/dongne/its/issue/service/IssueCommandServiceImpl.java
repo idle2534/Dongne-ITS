@@ -9,6 +9,7 @@ import com.dongne.its.issue.web.dto.IssueCreateRequestDto;
 import com.dongne.its.issue.web.dto.IssueDeleteRequestDto;
 import com.dongne.its.issue.web.dto.IssueStatusUpdateRequestDto;
 import com.dongne.its.issue.web.dto.IssueUpdateRequestDto;
+import com.dongne.its.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +18,7 @@ import org.springframework.stereotype.Service;
 public class IssueCommandServiceImpl implements IssueCommandService{
 
   private final IssueRepository issueRepository;
-
-  @Override
-  public void CheckFlag(Integer flag) {
-
-  }
+  private final MemberRepository memberRepository;
 
   @Override
   public Issue updateIssue(IssueUpdateRequestDto request) {
@@ -35,31 +32,49 @@ public class IssueCommandServiceImpl implements IssueCommandService{
 
   @Override
   public Issue updateIssueDev(IssueStatusUpdateRequestDto request) {
-    return null;
+    Issue issue = issueRepository.findById(request.getIssueId()).orElseThrow();
+    issue.setStatus(Status.valueOf(request.getStatus()));
+    return issueRepository.save(issue);
   }
 
   @Override
   public Issue reassign(IssueAssignRequestDto request) {
-    return null;
+    Issue issue = issueRepository.findById(request.getIssueId()).orElseThrow();
+    issue.setAssignee(memberRepository.findById(request.getAssigneeId()).orElseThrow());
+    return issueRepository.save(issue);
   }
 
   @Override
   public Issue deleteRequest(IssueDeleteRequestDto request) {
-    return null;
+    Issue issue = issueRepository.findById(request.getIssueId()).orElseThrow();
+    // issue.setStatus(Status.DELETE_REQUEST);
+    return issueRepository.save(issue);
   }
 
   @Override
   public Issue delete(IssueDeleteRequestDto request) {
-    return null;
+    Issue issue = issueRepository.findById(request.getIssueId()).orElseThrow();
+    issue.setDeleted(true);
+    return issueRepository.save(issue);
   }
 
   @Override
   public Issue assign(IssueAssignRequestDto request) {
-    return null;
+    Issue issue = issueRepository.findById(request.getIssueId()).orElseThrow();
+    issue.setAssignee(memberRepository.findById(request.getAssigneeId()).orElseThrow());
+    return issueRepository.save(issue);
   }
 
   @Override
-  public Issue create(IssueCreateRequestDto request) {
-    return null;
+  public Issue create(Long id, IssueCreateRequestDto request) {
+    Issue issue = Issue.builder()
+            .title(request.getTitle())
+            .description(request.getDescription())
+            .projectId(request.getProjectId())
+            .category(request.getCategory())
+            .build();
+    //issue.setStatus(Status.NEW);
+    issue.setReporter(memberRepository.findById(id).orElseThrow());
+    return issueRepository.save(issue);
   }
 }

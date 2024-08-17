@@ -6,10 +6,9 @@ import com.dongne.its.issue.web.dto.IssueCreateRequestDto;
 import com.dongne.its.issue.web.dto.IssueDeleteRequestDto;
 import com.dongne.its.issue.web.dto.IssueStatusUpdateRequestDto;
 import com.dongne.its.issue.web.dto.IssueUpdateRequestDto;
+import com.dongne.its.member.domain.Member;
 
 public interface IssueCommandService {
-
-  void CheckFlag(Integer flag);
 
   public Issue updateIssue(IssueUpdateRequestDto request);
 
@@ -23,7 +22,6 @@ public interface IssueCommandService {
 
   public Issue assign(IssueAssignRequestDto request);
 
-  public Issue create(IssueCreateRequestDto request);
-
+  public Issue create(Long id, IssueCreateRequestDto request);
 
 }

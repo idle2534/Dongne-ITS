@@ -38,13 +38,4 @@ public class MemberConverter {
                 .isDeleted(false)
                 .build();
     }
-
-    public static Member toMember(MemberResponseDto request) {
-        return Member.builder()
-                .id(request.getId())
-                .name(request.getName())
-                .role(Role.valueOf(request.getRole()))
-                .isDeleted(request.getIsDeleted())
-                .build();
-    }
 }
