@@ -6,7 +6,7 @@ public interface IssueQueryService {
 
   void CheckFlag(Integer flag);
 
-  Issue findIssueByIssueId(Long id);
+  Issue findIssueById(Long id);
 
   Issue findIssueByProjectId(Long id);
 
