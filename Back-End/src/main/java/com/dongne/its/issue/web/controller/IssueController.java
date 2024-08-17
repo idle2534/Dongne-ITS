@@ -1,5 +1,6 @@
 package com.dongne.its.issue.web.controller;
 
+import com.dongne.its.base.apiPayload.code.ApiResponse;
 import com.dongne.its.issue.apiPayload.IssueApiResponse;
 import com.dongne.its.issue.converter.IssueConverter;
 import com.dongne.its.issue.converter.IssueErrorConverter;
@@ -33,98 +34,98 @@ public class IssueController {
 
   //Put
   @PutMapping("/update")
-  public ResponseEntity<IssueResponseDto> update(@RequestBody IssueUpdateRequestDto request){
+  public ResponseEntity<IssueResponseDto> update(@RequestHeader("id") Long id, @RequestBody IssueUpdateRequestDto request){
     Issue issue_target = issueCommandService.updateIssue(request);
-    return ResponseEntity.ok(IssueConverter.toIssueResponseDto(issue_target));
+    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
   }
 
   @PutMapping("/update/dev")
-  public ResponseEntity<IssueResponseDto> dev(@RequestBody IssueStatusUpdateRequestDto request){
+  public ResponseEntity<IssueResponseDto> dev(@RequestHeader("id") Long id, @RequestBody IssueStatusUpdateRequestDto request){
     Issue issue_target = issueCommandService.updateIssueDev(request);
-    return null;
+    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
   }
 
   @PutMapping("/reassign")
-  public ResponseEntity<IssueResponseDto> reassign(@RequestBody IssueAssignRequestDto request){
+  public ResponseEntity<IssueResponseDto> reassign(@RequestHeader("id") Long id, @RequestBody IssueAssignRequestDto request){
     Issue issue_target = issueCommandService.reassign(request);
-    return null;
+    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
   }
 
   @PutMapping("/deleteRequest")
-  public ResponseEntity<IssueResponseDto> deleteRequest(@RequestBody IssueDeleteRequestDto request){
+  public ResponseEntity<IssueResponseDto> deleteRequest(@RequestHeader("id") Long id, @RequestBody IssueDeleteRequestDto request){
     Issue issue_target = issueCommandService.deleteRequest(request);
-    return null;
+    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
   }
 
   @PutMapping("/deleteRequest/delete")
-  public ResponseEntity<IssueResponseDto> delete(@RequestBody IssueDeleteRequestDto request){
+  public ResponseEntity<IssueResponseDto> delete(@RequestHeader("id") Long id, @RequestBody IssueDeleteRequestDto request){
     Issue issue_target = issueCommandService.delete(request);
-    return null;
+    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
   }
 
   @PutMapping("/assign")
-  public ResponseEntity<IssueResponseDto> assign(@RequestBody IssueAssignRequestDto request){
+  public ResponseEntity<IssueResponseDto> assign(@RequestHeader("id") Long id, @RequestBody IssueAssignRequestDto request){
     Issue issue_target = issueCommandService.assign(request);
-    return null;
+    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
   }
 
 
   //Post
   @PostMapping("/create")
-  public ResponseEntity<IssueResponseDto> create(@RequestBody IssueCreateRequestDto request){
-    Issue issue_target = issueCommandService.create(request);
-    return null;
+  public ResponseEntity<IssueResponseDto> create(@RequestHeader("id") Long id, @RequestBody IssueCreateRequestDto request){
+    Issue issue_target = issueCommandService.create(id, request);
+    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
   }
 
 
   //Get
   @GetMapping("")
-  public ResponseEntity<IssueResponseDto> issue(@RequestParam Long issueId){
-    Issue issue_target = issueQueryService.findIssueByIssueId(issueId);
-    return null;
+  public ResponseEntity<IssueResponseDto> issue(@RequestHeader("id") Long id, @RequestParam("issueId") Long issueId){
+    Issue issue_target = issueQueryService.findIssueById(issueId);
+    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
   }
 
   @GetMapping("/{projectId}")
-  public ResponseEntity<IssueResponseDto> findIssueByProjectId(@PathVariable("projectId") Long projectId){
+  public ResponseEntity<IssueResponseDto> findIssueByProjectId(@RequestHeader("id") Long id, @PathVariable("projectId") Long projectId){
     Issue issue_target = issueQueryService.findIssueByProjectId(projectId);
-    return null;
+    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
   }
 
 
   @GetMapping("/{projectId}/tester")
-  public ResponseEntity<IssueResponseDto> findTesterByProjectId(@PathVariable("projectId") Long projectId){
+  public ResponseEntity<IssueResponseDto> findTesterByProjectId(@RequestHeader("id") Long id, @PathVariable("projectId") Long projectId){
     Issue issue_target = issueQueryService.findTesterByProjectId(projectId);
-    return null;
+    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
   }
 
   @GetMapping("/{projectId}/dev")
-  public ResponseEntity<IssueResponseDto> findDevByProjectId(@PathVariable("projectId") Long projectId){
+  public ResponseEntity<IssueResponseDto> findDevByProjectId(@RequestHeader("id") Long id, @PathVariable("projectId") Long projectId){
     Issue issue_target = issueQueryService.findDevByProjectId(projectId);
-    return null;
+    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
   }
 
   @GetMapping("/search")
   public ResponseEntity<IssueResponseDto> search(@RequestHeader("id") Long id, @RequestParam("category") String category, @RequestParam("projectId") Long projectId, @RequestParam("keyword") String keyword){
     Issue issue_target = issueQueryService.search(id, category, projectId, keyword);
-    return null;
+    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
   }
 
   @GetMapping("/issueRecommend")
   public ResponseEntity<IssueResponseDto> recommend(@RequestHeader("id") Long id, @RequestParam("issueId") Long issueId){
     Issue issue_target = issueQueryService.recommend(id, issueId);
-    return null;
+    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
   }
 
   @GetMapping("/deleteRequest/find")
   public ResponseEntity<IssueResponseDto> deleteFind(@RequestParam("id") Long id){
     Issue issue_target = issueQueryService.deleteFind(id);
-    return null;
+    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
   }
 
   @GetMapping("/all")
   public ResponseEntity<IssueResponseDto> all(@RequestHeader("id") Long id){
     Issue issue_target = issueQueryService.all(id);
-    return null;
+    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
   }
 
 
