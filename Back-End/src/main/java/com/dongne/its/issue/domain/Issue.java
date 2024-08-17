@@ -67,15 +67,13 @@ public class Issue extends BaseEntity {
   @JoinColumn(name = "assigneeId")
   private Member assignee;
 
-  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "projectId")
-  private Project project;
+  private Long projectId;
 
   @Column(length = 50)
   private String category;
 
-  @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
-  @JoinColumn(name = "commentId")
+  @OneToMany(mappedBy = "issueId", cascade = CascadeType.ALL)
   private List<Comment> comments;
 
   @Column()
