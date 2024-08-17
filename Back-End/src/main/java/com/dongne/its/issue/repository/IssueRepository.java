@@ -15,13 +15,18 @@ public interface IssueRepository extends JpaRepository<Issue, Long> {
   public Optional<Issue> findIssueById(@Param("id") Long id);
 
   @Query("select i from Issue i where i.projectId = :projectId and i.isDeleted = false")
-  public List<Issue> findIssueByProject(@Param("projectId") String projectId);
+  public List<Issue> findIssueByProjectId(@Param("projectId") Long projectId);
 
 //  특정 프로젝트의 테스터가 담당하는 이슈들을 반환한다
-//  @Query("select i from Issue i, Project p where p.i and p.id = :projectId")
-//  public List<Issue> findTesterByProjectId(@Param("projectId") String projectId);
+  @Query("select i from Issue i, Project p, i.projectId pi "
+      + "where p.id = pi and  pi = :projectId "
+      + "and i.reporter in elements(p.projectMemberList) and i.isDeleted = false ")
+  public List<Issue> findTesterByProjectId(@Param("projectId") Long projectId);
 
-  //findDevByProjectId
+  @Query("select i from Issue i, Project p, i.projectId pi "
+      + "where p.id = pi and pi = :projectId "
+      + "and i.assignee in elements(p.projectMemberList) and i.isDeleted = false ")
+  public List<Issue> findDevByProjectId(@Param("projectId") Long projectId);
 
   @Query("select i from Issue i, Project p where p.id = :projectId and i.projectId = p.id "
       + "and i.description like %:keyword% and i.isDeleted = false")
