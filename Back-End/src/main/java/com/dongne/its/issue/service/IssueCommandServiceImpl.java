@@ -1,5 +1,6 @@
 package com.dongne.its.issue.service;
 
+import com.dongne.its.issue.converter.IssueConverter;
 import com.dongne.its.issue.domain.Issue;
 import com.dongne.its.issue.domain.enums.Priority;
 import com.dongne.its.issue.domain.enums.Status;
@@ -47,7 +48,7 @@ public class IssueCommandServiceImpl implements IssueCommandService{
   @Override
   public Issue deleteRequest(IssueDeleteRequestDto request) {
     Issue issue = issueRepository.findById(request.getIssueId()).orElseThrow();
-    // issue.setStatus(Status.DELETE_REQUEST);
+    issue.setStatus(Status.DELETE_REQUEST);
     return issueRepository.save(issue);
   }
 
@@ -67,13 +68,8 @@ public class IssueCommandServiceImpl implements IssueCommandService{
 
   @Override
   public Issue create(Long id, IssueCreateRequestDto request) {
-    Issue issue = Issue.builder()
-            .title(request.getTitle())
-            .description(request.getDescription())
-            .projectId(request.getProjectId())
-            .category(request.getCategory())
-            .build();
-    //issue.setStatus(Status.NEW);
+    Issue issue = IssueConverter.toIssue(request);
+    issue.setStatus(Status.NEW);
     issue.setReporter(memberRepository.findById(id).orElseThrow());
     return issueRepository.save(issue);
   }

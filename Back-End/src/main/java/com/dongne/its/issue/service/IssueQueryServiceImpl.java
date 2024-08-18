@@ -7,6 +7,8 @@ import com.dongne.its.issue.repository.IssueRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class IssueQueryServiceImpl implements IssueQueryService{
@@ -21,49 +23,48 @@ public class IssueQueryServiceImpl implements IssueQueryService{
 
   @Override
   public Issue findIssueById(Long id) {
-    return null;
-//    return issueRepository.findIssueByIssueId(id);
+    return issueRepository.findIssueById(id).orElseThrow();
   }
 
   @Override
-  public Issue findIssueByProjectId(Long id) {
+  public List<Issue> findIssueByProjectId(Long id) {
     return null;
-//    return issueRepository.findIssueByProjectId(id);
+    //return issueRepository.findIssueByProjectId(id);
   }
 
   @Override
-  public Issue findTesterByProjectId(Long id) {
+  public List<Issue> findTesterByProjectId(Long id) {
     return null;
-//    return issueRepository.findTesterByProjectId(id);
+    //return issueRepository.findTesterByProjectId(id);
   }
 
   @Override
-  public Issue findDevByProjectId(Long id) {
+  public List<Issue> findDevByProjectId(Long id) {
     return null;
-//    return issueRepository.findDevByProjectId(id);
+    //return issueRepository.findDevByProjectId(id);
   }
 
   @Override
-  public Issue search(Long id, String category, Long projectId, String keyword) {
+  public List<Issue> search(Long id, String category, Long projectId, String keyword) {
     return null;
-//    return issueRepository.search(id, category, projectId, keyword);
+    //return issueRepository.search(id, category, projectId, keyword);
   }
 
   @Override
-  public Issue recommend(Long id, Long issueId) {
+  public List<Issue> recommend(Long id, Long issueId) {
     return null;
-//    return issueRepository.recommend(id, issueId);
+    //return issueRepository.recommend(id, issueId);
   }
 
   @Override
-  public Issue deleteFind(Long id) {
+  public List<Issue> deleteFind(Long id) {
     return null;
-//    return issueRepository.deleteFind(id);
+    //return issueRepository.deleteFind(id);
   }
 
   @Override
-  public Issue all(Long id) {
+  public List<Issue> all(Long id) {
     return null;
-//    return issueRepository.all(id);
+    //return issueRepository.all(id);
   }
 }
