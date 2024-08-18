@@ -19,5 +19,5 @@ public class ProjectResponseDto {
     private List<MemberResponseDto> members;
     private List<IssueResponseDto> issues;
     private Long leaderId;
-    private Boolean isDeleted;
+    private boolean isDeleted;
 }
