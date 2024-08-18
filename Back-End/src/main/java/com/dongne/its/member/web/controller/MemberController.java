@@ -52,7 +52,6 @@ public class MemberController {
     @PostMapping("/signIn")
     public ResponseEntity<MemberResponseDto> signIn(@RequestBody MemberSignInRequestDto request) {
         Member member = memberCommandService.signIn(request);
-        System.out.println(MemberConverter.toMemberResponseDto(member).getId() + "/" + MemberConverter.toMemberResponseDto(member).getSignId() + "/" + MemberConverter.toMemberResponseDto(member).getRole());
         return ApiResponse.onSuccess(MemberConverter.toMemberResponseDto(member));
     }
 
@@ -74,23 +73,23 @@ public class MemberController {
     public ResponseEntity<List<MemberResponseDto>> account(@RequestHeader("id") Long id) {
         Member member_request = memberQueryService.findMemberById(id);
         memberCommandService.checkRole(member_request, Role.ADMIN);
-        List<Member> member = memberQueryService.findMembers();
-        return ApiResponse.onSuccess(MemberConverter.toListMemberResponseDto(member));
+        List<Member> member_target = memberQueryService.findMembers();
+        return ApiResponse.onSuccess(MemberConverter.toListMemberResponseDto(member_target));
     }
 
     @GetMapping("/account/project")
     public ResponseEntity<List<MemberResponseDto>> project(@RequestHeader("id") Long id, @RequestParam("projectId") Long projectId) {
         Member member_request = memberQueryService.findMemberById(id);
         memberCommandService.checkRole(member_request, Role.ADMIN);
-        List<Member> member = memberQueryService.findMembersByProjectId(projectId);
-        return ApiResponse.onSuccess(MemberConverter.toListMemberResponseDto(member));
+        List<Member> member_target = memberQueryService.findMembersByProjectId(projectId);
+        return ApiResponse.onSuccess(MemberConverter.toListMemberResponseDto(member_target));
     }
 
     @GetMapping("/account/project/role")
     public ResponseEntity<List<MemberResponseDto>> role(@RequestHeader("id") Long id, @RequestParam("projectId") Long projectId, @RequestParam("role") String role) {
         Member member_request = memberQueryService.findMemberById(id);
         memberCommandService.checkRole(member_request, Role.ADMIN);
-        List<Member> member = memberQueryService.findMembersByProjectIdAndRole(projectId, role);
-        return ApiResponse.onSuccess(MemberConverter.toListMemberResponseDto(member));
+        List<Member> member_target = memberQueryService.findMembersByProjectIdAndRole(projectId, role);
+        return ApiResponse.onSuccess(MemberConverter.toListMemberResponseDto(member_target));
     }
 }

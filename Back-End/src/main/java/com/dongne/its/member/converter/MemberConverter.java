@@ -18,6 +18,7 @@ public class MemberConverter {
                 .isDeleted(member.isDeleted())
                 .build();
     }
+
     public static List<MemberResponseDto> toListMemberResponseDto(List<Member> members){
         return members.stream().map(member -> MemberResponseDto.builder()
                 .id(member.getId())
@@ -27,7 +28,6 @@ public class MemberConverter {
                 .isDeleted(member.isDeleted())
                 .build()).toList();
     }
-
 
     public static Member toMember(MemberSignUpRequestDto request) {
         return Member.builder()

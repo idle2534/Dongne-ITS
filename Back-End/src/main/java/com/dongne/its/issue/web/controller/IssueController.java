@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/issue")
 @RequiredArgsConstructor
@@ -86,46 +88,46 @@ public class IssueController {
   }
 
   @GetMapping("/{projectId}")
-  public ResponseEntity<IssueResponseDto> findIssueByProjectId(@RequestHeader("id") Long id, @PathVariable("projectId") Long projectId){
-    Issue issue_target = issueQueryService.findIssueByProjectId(projectId);
-    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
+  public ResponseEntity<List<IssueResponseDto>> findIssueByProjectId(@RequestHeader("id") Long id, @PathVariable("projectId") Long projectId){
+    List<Issue> issues_target = issueQueryService.findIssueByProjectId(projectId);
+    return ApiResponse.onSuccess(IssueConverter.toListIssueResponseDto(issues_target));
   }
 
 
   @GetMapping("/{projectId}/tester")
-  public ResponseEntity<IssueResponseDto> findTesterByProjectId(@RequestHeader("id") Long id, @PathVariable("projectId") Long projectId){
-    Issue issue_target = issueQueryService.findTesterByProjectId(projectId);
-    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
+  public ResponseEntity<List<IssueResponseDto>> findTesterByProjectId(@RequestHeader("id") Long id, @PathVariable("projectId") Long projectId){
+    List<Issue> issues_target = issueQueryService.findTesterByProjectId(projectId);
+    return ApiResponse.onSuccess(IssueConverter.toListIssueResponseDto(issues_target));
   }
 
   @GetMapping("/{projectId}/dev")
-  public ResponseEntity<IssueResponseDto> findDevByProjectId(@RequestHeader("id") Long id, @PathVariable("projectId") Long projectId){
-    Issue issue_target = issueQueryService.findDevByProjectId(projectId);
-    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
+  public ResponseEntity<List<IssueResponseDto>> findDevByProjectId(@RequestHeader("id") Long id, @PathVariable("projectId") Long projectId){
+    List<Issue> issues_target = issueQueryService.findDevByProjectId(projectId);
+    return ApiResponse.onSuccess(IssueConverter.toListIssueResponseDto(issues_target));
   }
 
   @GetMapping("/search")
-  public ResponseEntity<IssueResponseDto> search(@RequestHeader("id") Long id, @RequestParam("category") String category, @RequestParam("projectId") Long projectId, @RequestParam("keyword") String keyword){
-    Issue issue_target = issueQueryService.search(id, category, projectId, keyword);
-    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
+  public ResponseEntity<List<IssueResponseDto>> search(@RequestHeader("id") Long id, @RequestParam("category") String category, @RequestParam("projectId") Long projectId, @RequestParam("keyword") String keyword){
+    List<Issue> issues_target = issueQueryService.search(id, category, projectId, keyword);
+    return ApiResponse.onSuccess(IssueConverter.toListIssueResponseDto(issues_target));
   }
 
   @GetMapping("/issueRecommend")
-  public ResponseEntity<IssueResponseDto> recommend(@RequestHeader("id") Long id, @RequestParam("issueId") Long issueId){
-    Issue issue_target = issueQueryService.recommend(id, issueId);
-    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
+  public ResponseEntity<List<IssueResponseDto>> recommend(@RequestHeader("id") Long id, @RequestParam("issueId") Long issueId){
+    List<Issue> issues_target = issueQueryService.recommend(id, issueId);
+    return ApiResponse.onSuccess(IssueConverter.toListIssueResponseDto(issues_target));
   }
 
   @GetMapping("/deleteRequest/find")
-  public ResponseEntity<IssueResponseDto> deleteFind(@RequestParam("id") Long id){
-    Issue issue_target = issueQueryService.deleteFind(id);
-    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
+  public ResponseEntity<List<IssueResponseDto>> deleteFind(@RequestParam("id") Long id){
+    List<Issue> issues_target = issueQueryService.deleteFind(id);
+    return ApiResponse.onSuccess(IssueConverter.toListIssueResponseDto(issues_target));
   }
 
   @GetMapping("/all")
-  public ResponseEntity<IssueResponseDto> all(@RequestHeader("id") Long id){
-    Issue issue_target = issueQueryService.all(id);
-    return ApiResponse.onSuccess(IssueConverter.toIssueResponseDto(issue_target));
+  public ResponseEntity<List<IssueResponseDto>> all(@RequestHeader("id") Long id){
+    List<Issue> issues_target = issueQueryService.all(id);
+    return ApiResponse.onSuccess(IssueConverter.toListIssueResponseDto(issues_target));
   }
 
 
