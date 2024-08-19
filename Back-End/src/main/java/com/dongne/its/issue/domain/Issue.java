@@ -67,8 +67,9 @@ public class Issue extends BaseEntity {
   @JoinColumn(name = "assigneeId")
   private Member assignee;
 
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "projectId")
-  private Long projectId;
+  private Project project;
 
   @Column(length = 50)
   private String category;

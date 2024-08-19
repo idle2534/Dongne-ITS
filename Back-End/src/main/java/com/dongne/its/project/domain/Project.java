@@ -29,7 +29,7 @@ public class Project extends BaseEntity {
     @Column
     private boolean isDeleted;
 
-    @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<Issue> issueList = new ArrayList<>();
 
     @OneToMany(mappedBy = "projectMembers", cascade = CascadeType.ALL)
