@@ -14,22 +14,22 @@ public interface IssueRepository extends JpaRepository<Issue, Long> {
   @Query("select i from Issue i where i.id = :id and i.isDeleted = false ")
   public Optional<Issue> findIssueById(@Param("id") Long id);
 
-  @Query("select i from Issue i where i.projectId = :projectId and i.isDeleted = false")
+  @Query("select i from Issue i where i.project.id = :projectId and i.isDeleted = false")
   public List<Issue> findIssueByProjectId(@Param("projectId") Long projectId);
 
 //  특정 프로젝트의 테스터가 담당하는 이슈들을 반환한다
-  @Query("select i from Issue i, Project p, i.projectId pi "
-      + "where p.id = pi and  pi = :projectId "
-      + "and i.reporter in elements(p.projectMemberList) and i.isDeleted = false ")
+//  @Query("select i from Issue i, Project p, i.project.id pi "
+//      + "where p.id = pi and  pi = :projectId "
+//      + "and i.reporter in elements(p.projectMembers) and i.isDeleted = false ")
   public List<Issue> findTesterByProjectId(@Param("projectId") Long projectId);
 
-  @Query("select i from Issue i, Project p, i.projectId pi "
-      + "where p.id = pi and pi = :projectId "
-      + "and i.assignee in elements(p.projectMemberList) and i.isDeleted = false ")
+//  @Query("select i from Issue i, Project p, i.project.id pi "
+//      + "where p.id = pi and pi = :projectId "
+//      + "and i.assignee in elements(p.projectMembers) and i.isDeleted = false ")
   public List<Issue> findDevByProjectId(@Param("projectId") Long projectId);
 
-  @Query("select i from Issue i, Project p where p.id = :projectId and i.projectId = p.id "
-      + "and i.description like %:keyword% and i.isDeleted = false")
+  @Query("select i from Issue i, Project p where p.id = :projectId and i.project.id = p.id "
+      + "and i.category = :category and i.description like %:keyword% and i.isDeleted = false")
   public List<Issue> search(@Param("category") String category, @Param("projectId") Long projectId, @Param("keyword") String keyword);
 
 //  @Query("")
