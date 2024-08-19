@@ -10,6 +10,8 @@ import java.util.List;
 public class MemberConverter {
 
     public static MemberResponseDto toMemberResponseDto(Member member){
+        if(member == null) return null;
+
         return MemberResponseDto.builder()
                 .id(member.getId())
                 .role(String.valueOf(member.getRole()))
@@ -20,6 +22,8 @@ public class MemberConverter {
     }
 
     public static List<MemberResponseDto> toListMemberResponseDto(List<Member> members){
+        if(members==null || members.isEmpty()) return null;
+
         return members.stream().map(member -> MemberResponseDto.builder()
                 .id(member.getId())
                 .role(String.valueOf(member.getRole()))

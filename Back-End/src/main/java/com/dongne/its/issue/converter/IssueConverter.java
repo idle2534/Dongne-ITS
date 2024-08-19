@@ -8,6 +8,8 @@ import java.util.List;
 
 public class IssueConverter {
   public static IssueResponseDto toIssueResponseDto(Issue issue){
+    if(issue == null) return null;
+
     return IssueResponseDto.builder()
         .id(issue.getId())
         .title(issue.getTitle())
@@ -17,7 +19,7 @@ public class IssueConverter {
         .reporter(MemberConverter.toMemberResponseDto(issue.getReporter()))
         .fixer(MemberConverter.toMemberResponseDto(issue.getFixer()))
         .assignee(MemberConverter.toMemberResponseDto(issue.getAssignee()))
-//        .projectId(ProjectConverter.toProjectResponseDto(issue.getProject()))
+        .projectId(issue.getProject().getId())
         .category(issue.getCategory())
 //        .comments(CommentConverter.toCommentResponseDto(issue.getComments()))
         .isDeleted(issue.isDeleted())
@@ -25,6 +27,8 @@ public class IssueConverter {
   }
 
   public static List<IssueResponseDto> toListIssueResponseDto(List<Issue> issues){
+    if(issues == null || issues.isEmpty()) return null;
+
     return issues.stream().map(issue -> IssueResponseDto.builder()
         .id(issue.getId())
         .title(issue.getTitle())
@@ -34,7 +38,7 @@ public class IssueConverter {
         .reporter(MemberConverter.toMemberResponseDto(issue.getReporter()))
         .fixer(MemberConverter.toMemberResponseDto(issue.getFixer()))
         .assignee(MemberConverter.toMemberResponseDto(issue.getAssignee()))
-//        .projectId(ProjectConverter.toProjectResponseDto(issue.getProject()))
+        .projectId(issue.getProject().getId())
         .category(issue.getCategory())
 //        .comments(CommentConverter.toCommentResponseDto(issue.getComments()))
         .isDeleted(issue.isDeleted())
@@ -45,7 +49,6 @@ public class IssueConverter {
     return Issue.builder()
         .title(request.getTitle())
         .description(request.getDescription())
-//      .projectId(ProjectConverter.toProjectResponseDto(request.getProject()))
         .category(request.getCategory())
         .build();
   }
