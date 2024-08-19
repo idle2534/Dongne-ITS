@@ -1,8 +1,8 @@
 package com.dongne.its.project.domain;
 
 import com.dongne.its.base.domain.common.BaseEntity;
+import com.dongne.its.base.domain.mapping.ProjectMembers;
 import com.dongne.its.issue.domain.Issue;
-import com.dongne.its.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor (access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -30,8 +31,8 @@ public class Project extends BaseEntity {
     private boolean isDeleted;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    private List<Issue> issueList = new ArrayList<>();
+    private List<Issue> issues = new ArrayList<>();
 
-    @OneToMany(mappedBy = "projectMembers", cascade = CascadeType.ALL)
-    private List<Member> projectMemberList = new ArrayList<>();
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private List<ProjectMembers> projectMembers = new ArrayList<>();
 }
