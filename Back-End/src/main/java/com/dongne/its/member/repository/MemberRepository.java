@@ -21,9 +21,9 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query("select m from Member m where m.role != 'ADMIN' and m.isDeleted = false")
     public List<Member> findAllMembers();
 
-    @Query("SELECT pm.member FROM Project_members pm WHERE pm.project.id = :projectId")
+    @Query("SELECT pm.member FROM ProjectMembers pm WHERE pm.project.id = :projectId")
     public List<Member> findByProjectId(@Param("projectId") Long projectId);
 
-    @Query("SELECT pm.member FROM Project_members pm WHERE pm.project.id = :projectId AND pm.member.role = :role")
+    @Query("SELECT pm.member FROM ProjectMembers pm WHERE pm.project.id = :projectId AND pm.member.role = :role")
     public List<Member> findByProjectIdAndRole(@Param("projectId") Long projectId, @Param("role") String role);
 }
