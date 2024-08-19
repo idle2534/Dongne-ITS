@@ -11,6 +11,7 @@ import com.dongne.its.issue.web.dto.IssueDeleteRequestDto;
 import com.dongne.its.issue.web.dto.IssueStatusUpdateRequestDto;
 import com.dongne.its.issue.web.dto.IssueUpdateRequestDto;
 import com.dongne.its.member.repository.MemberRepository;
+import com.dongne.its.project.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 public class IssueCommandServiceImpl implements IssueCommandService{
 
   private final IssueRepository issueRepository;
+  private final ProjectRepository projectRepository;
   private final MemberRepository memberRepository;
 
   @Override
@@ -69,6 +71,7 @@ public class IssueCommandServiceImpl implements IssueCommandService{
   @Override
   public Issue create(Long id, IssueCreateRequestDto request) {
     Issue issue = IssueConverter.toIssue(request);
+    issue.setProject(projectRepository.findById(request.getProjectId()).orElseThrow());
     issue.setStatus(Status.NEW);
     issue.setReporter(memberRepository.findById(id).orElseThrow());
     return issueRepository.save(issue);
