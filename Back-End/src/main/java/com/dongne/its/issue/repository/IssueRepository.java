@@ -1,6 +1,8 @@
 package com.dongne.its.issue.repository;
 
 import com.dongne.its.issue.domain.Issue;
+import com.dongne.its.issue.domain.enums.Priority;
+import com.dongne.its.issue.domain.enums.Status;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,27 +19,38 @@ public interface IssueRepository extends JpaRepository<Issue, Long> {
   @Query("select i from Issue i where i.project.id = :projectId and i.isDeleted = false")
   public List<Issue> findIssueByProjectId(@Param("projectId") Long projectId);
 
-//  특정 프로젝트의 테스터가 담당하는 이슈들을 반환한다
-//  @Query("select i from Issue i, Project p, i.project.id pi "
-//      + "where p.id = pi and  pi = :projectId "
-//      + "and i.reporter in elements(p.projectMembers) and i.isDeleted = false ")
+  //특정 프로젝트의 테스터가 담당하는 이슈들을 반환한다
+  @Query("select i from Issue i join i.project p join i.reporter r join p.issues pi where r.id = pi.reporter.id and p.id = :projectId")
   public List<Issue> findTesterByProjectId(@Param("projectId") Long projectId);
 
-//  @Query("select i from Issue i, Project p, i.project.id pi "
-//      + "where p.id = pi and pi = :projectId "
-//      + "and i.assignee in elements(p.projectMembers) and i.isDeleted = false ")
+//  @Query("select i from Issue i join i.project p join i.assignee r join p.issues pi where r.id = pi.assignee.id and p.id = :projectId")
+@Query("select i from Issue i join i.project p join i.assignee r join p.issues pi where (r.id = pi.assignee.id or r.id = pi.reporter.id) and p.id = :projectId")
   public List<Issue> findDevByProjectId(@Param("projectId") Long projectId);
 
   @Query("select i from Issue i, Project p where p.id = :projectId and i.project.id = p.id "
-      + "and i.category = :category and i.description like %:keyword% and i.isDeleted = false")
-  public List<Issue> search(@Param("category") String category, @Param("projectId") Long projectId, @Param("keyword") String keyword);
+      + "and i.title like %:keyword% and i.isDeleted = false")
+  public List<Issue> titleSearch(@Param("projectId") Long projectId, @Param("keyword") String keyword);
 
-//  @Query("")
-//  public List<Issue> recommend(@Param("issueId") Long issueId);
+  @Query("select i from Issue i, Project p where p.id = :projectId and i.project.id = p.id "
+      + "and i.status = :keyword and i.isDeleted = false")
+  public List<Issue> statusSearch(@Param("projectId") Long projectId, @Param("keyword") Status keyword);
+
+  @Query("select i from Issue i, Project p where p.id = :projectId and i.project.id = p.id "
+      + "and i.priority = :keyword and i.isDeleted = false")
+  public List<Issue> prioritySearch(@Param("projectId") Long projectId, @Param("keyword") Priority keyword);
+
+  @Query("select i from Issue i, Project p where p.id = :projectId and i.project.id = p.id "
+      + "and i.assignee.name like %:keyword% and i.isDeleted = false")
+  public List<Issue> assigneeSearch(@Param("projectId") Long projectId, @Param("keyword") String keyword);
+
+  @Query("select i from Issue i "
+      + "where i.project = (select iss.project from Issue iss where iss.id = :issueId) "
+      + "and i.isDeleted = false")
+  public List<Issue> recommend(@Param("issueId") Long issueId);
 
   @Query("select i from Issue i where i.status = 'DELETE_REQUEST'")
   public List<Issue> deleteFind();
 
-  @Query("select i from Issue i")
+  @Query("select i from Issue i where i.isDeleted = false")
   public  List<Issue> all();
 }

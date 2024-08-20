@@ -2,6 +2,7 @@ package com.dongne.its.issue.service;
 
 import com.dongne.its.issue.domain.Issue;
 
+import com.dongne.its.issue.web.dto.IssueRecommendResponseDto;
 import java.util.List;
 
 public interface IssueQueryService {
@@ -16,11 +17,11 @@ public interface IssueQueryService {
 
   List<Issue> findDevByProjectId(Long id);
 
-  List<Issue> search(Long id, String category, Long projectId, String keyword);
+  List<Issue> search(String category, Long projectId, String keyword);
 
-  List<Issue> recommend(Long id, Long issueId);
+  List<IssueRecommendResponseDto> recommend(Long issueId);
 
-  List<Issue> deleteFind(Long id);
+  List<Issue> deleteFind();
 
-  List<Issue> all(Long id);
+  List<Issue> all();
 }

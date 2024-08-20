@@ -18,14 +18,16 @@ public enum ErrorStatus implements BaseErrorCode {
     // Member Error
     MEMBER_NOT_FOUND(HttpStatus.BAD_REQUEST, 4001, "사용자가 없습니다."),
     NICKNAME_NOT_EXIST(HttpStatus.BAD_REQUEST, 4002, "닉네임은 필수 입니다."),
-    PERMISSION_DENY(HttpStatus.BAD_REQUEST, 4003, "권한이 없습니다.");
+    PERMISSION_DENY(HttpStatus.BAD_REQUEST, 4003, "권한이 없습니다."),
 
     // Project Error
 
     // Issue Error
+    CATEGORY_NOT_MATCH(HttpStatus.BAD_REQUEST,4004,"검색 카테고리가 올바르지 않습니다.")
 
     // Comment Error
 
+;
     private final HttpStatus httpStatus;
     private final Integer code;
     private final String message;
