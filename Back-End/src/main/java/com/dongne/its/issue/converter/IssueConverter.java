@@ -2,6 +2,7 @@ package com.dongne.its.issue.converter;
 
 import com.dongne.its.issue.domain.Issue;
 import com.dongne.its.issue.web.dto.IssueCreateRequestDto;
+import com.dongne.its.issue.web.dto.IssueRecommendResponseDto;
 import com.dongne.its.issue.web.dto.IssueResponseDto;
 import com.dongne.its.member.converter.MemberConverter;
 import java.util.List;
@@ -42,6 +43,26 @@ public class IssueConverter {
         .category(issue.getCategory())
 //        .comments(CommentConverter.toCommentResponseDto(issue.getComments()))
         .isDeleted(issue.isDeleted())
+        .build()).toList();
+  }
+
+  public static IssueRecommendResponseDto toIssueRecommendResponseDto(IssueResponseDto issueResponseDto, Long score){
+    if(issueResponseDto == null) return null;
+
+    return IssueRecommendResponseDto.builder()
+        .issueResponseDto(issueResponseDto)
+        .score(score)
+        .isDeleted(false)
+        .build();
+  }
+
+  public static List<IssueRecommendResponseDto> toListIssueRecommendResponseDto(List<IssueRecommendResponseDto> recommends){
+    if(recommends == null || recommends.isEmpty()) return null;
+
+    return recommends.stream().map(recommend -> IssueRecommendResponseDto.builder()
+        .issueResponseDto(recommend.getIssueResponseDto())
+        .score(recommend.getScore())
+        .isDeleted(recommend.getIsDeleted())
         .build()).toList();
   }
 
