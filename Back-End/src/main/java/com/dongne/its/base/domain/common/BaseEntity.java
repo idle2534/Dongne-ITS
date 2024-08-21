@@ -26,7 +26,4 @@ public abstract class BaseEntity {
 
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
-
-    @LastModifiedBy
-    private String lastModifiedBy;
 }
