@@ -61,6 +61,24 @@ export const CreateProject = ({ onClose }: { onClose: () => void }) => {
       return;
     }
 
+    var flag = false;
+    members.map((id, index) => {
+      const user = users.find((user) => user.id === id);
+      
+      if (!user){
+        setMessage("예기치 않은 오류가 발생했습니다.");
+        return;
+      }
+
+      if (user.role === "PL"){
+        flag = true;
+      }
+    });
+    if (!flag){
+      setMessage("프로젝트 리더가 존재하지 않습니다.");
+      return;
+    }
+
     addProject({ name: data.name, memberIds: members });
 
     onClose();
