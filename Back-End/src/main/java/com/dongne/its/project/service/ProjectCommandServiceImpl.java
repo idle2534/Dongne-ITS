@@ -2,6 +2,7 @@ package com.dongne.its.project.service;
 
 import com.dongne.its.base.Repository.ProjectMembersRepository;
 import com.dongne.its.base.domain.mapping.ProjectMembers;
+import com.dongne.its.member.domain.Member;
 import com.dongne.its.member.repository.MemberRepository;
 import com.dongne.its.project.converter.ProjectConverter;
 import com.dongne.its.project.domain.Project;
@@ -24,16 +25,41 @@ public class ProjectCommandServiceImpl implements ProjectCommandService{
     private final MemberRepository memberRepository;
 
     @Override
-    public Project memberRemove(ProjectMemberRemoveRequestDto request) {
+    public Project memberRemove(ProjectMemberRemoveRequestDto request, Long projectId) {
+        Project project = projectRepository.findById(projectId).orElseThrow();
+        Member member = memberRepository.findById(request.getRemoveMemberId()).orElseThrow();
 
-        return null;
+        ProjectMembers projectMember = project.getProjectMembers().stream()
+                .filter(pm -> pm.getMember().equals(member))
+                .findFirst()
+                .orElseThrow();
+
+        project.getProjectMembers().remove(projectMember);
+        projectMembersRepository.delete(projectMember);
+        projectRepository.save(project);
+        return project;
     }
+
 
     @Override
-    public Project memberAdd(ProjectMemberAddRequestDto request) {
+    public Project memberAdd(ProjectMemberAddRequestDto request, Long projectId) {
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow();
+        Member member = memberRepository.findById(request.getAddMemberId())
+                .orElseThrow();
 
-        return null;
-    }
+        ProjectMembers projectMember = ProjectMembers.builder()
+                .project(project)
+                .member(member)
+                .build();
+
+        project.getProjectMembers().add(projectMember);
+        projectMembersRepository.save(projectMember);
+        projectRepository.save(project);
+
+        return project;
+        }
+
 
     @Override
     public Project create(ProjectCreateRequestDto request) {

@@ -14,4 +14,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     public Optional<Project> findProjectById(@Param("id") Long id);
 
 
+    @Query("select p from Project p where p.id = :id and p.isDeleted = false")
+    Optional<Project> findProjectByIdandProjectId(@Param("id") Long id, @Param("projectId") Long projectId);
 }

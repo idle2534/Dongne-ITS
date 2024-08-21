@@ -40,7 +40,6 @@ public class ProjectConverter {
     }
 
     // ResponseDto 를 Entity 로 변환 (필요한가?) <- IDLE : 솔직히 Project 에는 필요하지 않다고 생각하지만 이때까지 create 관련은 모두 Converter 를 써왔기에 일관성 유지를 위해 작성함
-    // List <ResponseDto> ->> List <Entity> Converter 가 필요함
     public static Project toProject(ProjectCreateRequestDto request) {
         return Project.builder()
                 .name(request.getName())
