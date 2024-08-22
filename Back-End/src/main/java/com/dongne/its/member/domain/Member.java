@@ -2,7 +2,7 @@ package com.dongne.its.member.domain;
 
 
 import com.dongne.its.base.domain.common.BaseEntity;
-import com.dongne.its.base.domain.mapping.ProjectMembers;
+import com.dongne.its.base.domain.mapping.ProjectMember;
 import com.dongne.its.issue.domain.Issue;
 import com.dongne.its.member.domain.enums.Role;
 import jakarta.persistence.*;
@@ -31,7 +31,7 @@ public class Member extends BaseEntity {
     private Role role;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<ProjectMembers> projectMembers;
+    private List<ProjectMember> projectMembers;
 
     @OneToMany(mappedBy = "reporter", cascade = CascadeType.ALL)
     private List<Issue> reportIssues;
@@ -44,5 +44,5 @@ public class Member extends BaseEntity {
 
     private String name;
 
-    private boolean isDeleted;
+    private Boolean isDeleted;
 }

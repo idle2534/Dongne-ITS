@@ -39,5 +39,5 @@ public class Comment extends BaseEntity {
   private Issue issueId;
 
   @Column()
-  private boolean isDeleted;
+  private Boolean isDeleted;
 }

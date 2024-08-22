@@ -52,8 +52,9 @@ public class Issue extends BaseEntity {
   @Enumerated(EnumType.STRING)
   private Status status;
 
-  @Column(columnDefinition = "DATETIME(6)")
-  private LocalDateTime reportedDate;
+//  @Column(columnDefinition = "DATETIME(6)")
+//  private LocalDateTime reportedDate;
+  private String reportedDate;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "reporterId")
@@ -77,6 +78,5 @@ public class Issue extends BaseEntity {
   @OneToMany(mappedBy = "issueId", cascade = CascadeType.ALL)
   private List<Comment> comments;
 
-  @Column()
-  private boolean isDeleted;
+  private Boolean isDeleted;
 }
