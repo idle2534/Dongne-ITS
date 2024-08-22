@@ -5,9 +5,8 @@ import com.dongne.its.project.domain.Project;
 import java.util.List;
 
 public interface ProjectQueryService {
-    public Project findProjectById(Long id);
 
-    // public List<Project> findProjects();
+    public Project findProjectById(Long projectId);
 
-    public Project findProjectByIdandProjectId(Long id, Long projectId);
+    public List<Project> findProjects();
 }

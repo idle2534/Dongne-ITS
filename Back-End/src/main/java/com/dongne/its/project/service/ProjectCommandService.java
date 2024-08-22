@@ -7,10 +7,11 @@ import com.dongne.its.project.web.dto.ProjectMemberRemoveRequestDto;
 
 public interface ProjectCommandService {
 
+    public Project removeMember(Long projectId, ProjectMemberRemoveRequestDto request);
 
-    public Project memberRemove(ProjectMemberRemoveRequestDto request, Long projectId);
-
-    public Project memberAdd(ProjectMemberAddRequestDto request, Long projectId);
+    public Project addMember(Long projectId, ProjectMemberAddRequestDto request);
 
     public Project create(ProjectCreateRequestDto request);
+
+    public Project delete(Long projectId);
 }

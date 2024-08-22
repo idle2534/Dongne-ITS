@@ -6,14 +6,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long> {
-    @Query("select p from Project p where p.id = :id and p.isDeleted = false")
-    public Optional<Project> findProjectById(@Param("id") Long id);
 
+    @Query("SELECT p from Project p WHERE p.id = :projectId")
+    public Optional<Project> findProjectById(@Param("projectId") Long projectId);
 
-    @Query("select p from Project p where p.id = :id and p.isDeleted = false")
-    Optional<Project> findProjectByIdandProjectId(@Param("id") Long id, @Param("projectId") Long projectId);
+    @Query("SELECT p from Project p WHERE p.isDeleted = false ")
+    public List<Project> findProjects();
 }
