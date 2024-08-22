@@ -1,5 +1,6 @@
 package com.dongne.its.issue.service;
 
+import com.dongne.its.base.apiPayload.code.GeneralTimestamp;
 import com.dongne.its.issue.converter.IssueConverter;
 import com.dongne.its.issue.domain.Issue;
 import com.dongne.its.issue.domain.enums.Priority;
@@ -11,9 +12,12 @@ import com.dongne.its.issue.web.dto.IssueDeleteRequestDto;
 import com.dongne.its.issue.web.dto.IssueStatusUpdateRequestDto;
 import com.dongne.its.issue.web.dto.IssueUpdateRequestDto;
 import com.dongne.its.member.repository.MemberRepository;
+import com.dongne.its.project.domain.Project;
 import com.dongne.its.project.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -57,7 +61,8 @@ public class IssueCommandServiceImpl implements IssueCommandService{
   @Override
   public Issue delete(IssueDeleteRequestDto request) {
     Issue issue = issueRepository.findById(request.getIssueId()).orElseThrow();
-    issue.setDeleted(true);
+    issue.setIsDeleted(true);
+    issue.setProject(null);
     return issueRepository.save(issue);
   }
 
@@ -65,15 +70,19 @@ public class IssueCommandServiceImpl implements IssueCommandService{
   public Issue assign(IssueAssignRequestDto request) {
     Issue issue = issueRepository.findById(request.getIssueId()).orElseThrow();
     issue.setAssignee(memberRepository.findById(request.getAssigneeId()).orElseThrow());
+    issue.setStatus(Status.ASSIGNED);
     return issueRepository.save(issue);
   }
 
   @Override
   public Issue create(Long id, IssueCreateRequestDto request) {
     Issue issue = IssueConverter.toIssue(request);
-    issue.setProject(projectRepository.findById(request.getProjectId()).orElseThrow());
+    issue.setPriority(Priority.MAJOR);
     issue.setStatus(Status.NEW);
+    issue.setProject(projectRepository.findById(request.getProjectId()).orElseThrow());
+    issue.setReportedDate(GeneralTimestamp.getTimestamp());
     issue.setReporter(memberRepository.findById(id).orElseThrow());
+    issue.setIsDeleted(false);
     return issueRepository.save(issue);
   }
 }
