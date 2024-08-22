@@ -1,7 +1,7 @@
 package com.dongne.its.project.domain;
 
 import com.dongne.its.base.domain.common.BaseEntity;
-import com.dongne.its.base.domain.mapping.ProjectMembers;
+import com.dongne.its.base.domain.mapping.ProjectMember;
 import com.dongne.its.issue.domain.Issue;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,12 +27,11 @@ public class Project extends BaseEntity {
     @Column(nullable = false, length = 20)
     private Long leaderId;
 
-    @Column
-    private boolean isDeleted;
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private List<Issue> issues;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    private List<Issue> issues = new ArrayList<>();
+    private List<ProjectMember> projectMembers;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    private List<ProjectMembers> projectMembers = new ArrayList<>();
+    private Boolean isDeleted;
 }
