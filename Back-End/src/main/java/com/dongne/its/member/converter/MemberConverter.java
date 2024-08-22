@@ -15,9 +15,9 @@ public class MemberConverter {
         return MemberResponseDto.builder()
                 .id(member.getId())
                 .role(String.valueOf(member.getRole()))
-                .name(member.getName())
+                .name(!member.getIsDeleted() ? member.getName() : "Deleted User")
                 .signId(member.getSignId())
-                .isDeleted(member.isDeleted())
+                .isDeleted(member.getIsDeleted())
                 .build();
     }
 
@@ -27,9 +27,9 @@ public class MemberConverter {
         return members.stream().map(member -> MemberResponseDto.builder()
                 .id(member.getId())
                 .role(String.valueOf(member.getRole()))
-                .name(member.getName())
+                .name(!member.getIsDeleted() ? member.getName() : "Deleted User")
                 .signId(member.getSignId())
-                .isDeleted(member.isDeleted())
+                .isDeleted(member.getIsDeleted())
                 .build()).toList();
     }
 
@@ -39,7 +39,6 @@ public class MemberConverter {
                 .password(request.getPassword())
                 .name(request.getName())
                 .role(Role.valueOf(request.getRole()))
-                .isDeleted(false)
                 .build();
     }
 }
