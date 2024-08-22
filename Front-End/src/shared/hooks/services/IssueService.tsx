@@ -41,7 +41,7 @@ export const IssueService = () => {
       `${MEMBERURL}?projectId=${id}&role=DEV`
     )) as AxiosResponse<User.User[]>;
 
-    return data;
+    return data || [];
   };
 
   const getComment = async (id: number) => {
@@ -57,7 +57,7 @@ export const IssueService = () => {
       `${MEMBERURL}?projectId=${id}&role=TESTER`
     )) as AxiosResponse<User.User[]>;
 
-    return data;
+    return data || [];
   };
 
   const createIssue = async (body: {
@@ -159,7 +159,7 @@ export const IssueService = () => {
       `${URL}/issueRecommend?issueId=${id}`
     )) as AxiosResponse<{ issueResponseDto: Issue.Issue; score: number }[]>;
 
-    return data;
+    return data || [];
   };
 
   return {

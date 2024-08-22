@@ -16,6 +16,9 @@ export const useIssueStore = create<Issue.IssueStore>()(
     comments: [],
 
     setIssue: (issue) => {
+      if (issue && !issue.comments)
+        issue.comments = [];
+
       console.log(issue);
       set(() => ({
         id: issue.id,
@@ -57,6 +60,9 @@ export const useIssueStore = create<Issue.IssueStore>()(
     },
 
     setComment: (comments) => {
+      if (!comments)
+        comments = [];
+
       set((state) => {
         state.comments = comments;
       });
