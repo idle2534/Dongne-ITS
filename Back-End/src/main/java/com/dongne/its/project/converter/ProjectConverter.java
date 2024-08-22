@@ -1,6 +1,6 @@
 package com.dongne.its.project.converter;
 
-import com.dongne.its.base.converter.ProjectMembersConverter;
+import com.dongne.its.base.converter.ProjectMemberConverter;
 import com.dongne.its.issue.converter.IssueConverter;
 import com.dongne.its.member.converter.MemberConverter;
 import com.dongne.its.project.domain.Project;
@@ -18,10 +18,10 @@ public class ProjectConverter {
         return ProjectResponseDto.builder()
                 .id(project.getId())
                 .name(project.getName())
-                .members(MemberConverter.toListMemberResponseDto(ProjectMembersConverter.toMembers(project.getProjectMembers())))
+                .members(MemberConverter.toListMemberResponseDto(ProjectMemberConverter.toMembers(project.getProjectMembers())))
                 .issues(IssueConverter.toListIssueResponseDto(project.getIssues()))
                 .leaderId(project.getLeaderId())
-                .isDeleted(project.isDeleted())
+                .isDeleted(project.getIsDeleted())
                 .build();
     }
 
@@ -32,10 +32,10 @@ public class ProjectConverter {
         return projects.stream().map(project -> ProjectResponseDto.builder()
                 .id(project.getId())
                 .name(project.getName())
-                .members(MemberConverter.toListMemberResponseDto(ProjectMembersConverter.toMembers(project.getProjectMembers())))
+                .members(MemberConverter.toListMemberResponseDto(ProjectMemberConverter.toMembers(project.getProjectMembers())))
                 .issues(IssueConverter.toListIssueResponseDto(project.getIssues()))
                 .leaderId(project.getLeaderId())
-                .isDeleted(project.isDeleted())
+                .isDeleted(project.getIsDeleted())
                 .build()).toList();
     }
 
@@ -44,7 +44,6 @@ public class ProjectConverter {
         return Project.builder()
                 .name(request.getName())
                 .leaderId(request.getMemberIds().get(0))
-                .isDeleted(false)
                 .build();
     }
 }

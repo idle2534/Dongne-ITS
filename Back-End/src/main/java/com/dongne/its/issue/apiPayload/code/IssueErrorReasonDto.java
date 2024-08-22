@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus;
 public class IssueErrorReasonDto {
   private String message;
   private String code;
-  private boolean isSuccess;
+  private Boolean isSuccess;
 
   private HttpStatus httpStatus;
 

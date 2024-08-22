@@ -18,12 +18,13 @@ public class IssueConverter {
         .priority(String.valueOf(issue.getPriority()))
         .status(String.valueOf(issue.getStatus()))
         .reporter(MemberConverter.toMemberResponseDto(issue.getReporter()))
+        .reportedDate(issue.getReportedDate())
         .fixer(MemberConverter.toMemberResponseDto(issue.getFixer()))
         .assignee(MemberConverter.toMemberResponseDto(issue.getAssignee()))
-        .projectId(issue.getProject().getId())
+        .projectId(issue.getProject() != null ? issue.getProject().getId() : null)
         .category(issue.getCategory())
 //        .comments(CommentConverter.toCommentResponseDto(issue.getComments()))
-        .isDeleted(issue.isDeleted())
+        .isDeleted(issue.getIsDeleted())
         .build();
   }
 
@@ -37,12 +38,13 @@ public class IssueConverter {
         .priority(String.valueOf(issue.getPriority()))
         .status(String.valueOf(issue.getStatus()))
         .reporter(MemberConverter.toMemberResponseDto(issue.getReporter()))
+        .reportedDate(issue.getReportedDate())
         .fixer(MemberConverter.toMemberResponseDto(issue.getFixer()))
         .assignee(MemberConverter.toMemberResponseDto(issue.getAssignee()))
-        .projectId(issue.getProject().getId())
+        .projectId(issue.getProject() != null ? issue.getProject().getId() : null)
         .category(issue.getCategory())
 //        .comments(CommentConverter.toCommentResponseDto(issue.getComments()))
-        .isDeleted(issue.isDeleted())
+        .isDeleted(issue.getIsDeleted())
         .build()).toList();
   }
 

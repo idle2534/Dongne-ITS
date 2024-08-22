@@ -2,6 +2,8 @@ package com.dongne.its.member.service;
 
 import com.dongne.its.base.apiPayload.code.status.ErrorStatus;
 import com.dongne.its.base.apiPayload.exception.handler.GeneralExceptionHandler;
+import com.dongne.its.issue.domain.Issue;
+import com.dongne.its.issue.repository.IssueRepository;
 import com.dongne.its.member.converter.MemberConverter;
 import com.dongne.its.member.domain.Member;
 import com.dongne.its.member.repository.MemberRepository;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 public class MemberCommandServiceImpl implements MemberCommandService {
 
     private final MemberRepository memberRepository;
+    private final IssueRepository issueRepository;
 
     @Override
     public void checkRole(Member member, Role role) {
@@ -41,13 +44,14 @@ public class MemberCommandServiceImpl implements MemberCommandService {
     @Override
     public Member delete(MemberDeleteRequestDto request) {
         Member member = memberRepository.findById(request.getId()).orElseThrow();
-        member.setDeleted(true);
+        member.setIsDeleted(true);
         return memberRepository.save(member);
     }
 
     @Override
     public Member signUp(MemberSignUpRequestDto request) {
         Member member = MemberConverter.toMember(request);
+        member.setIsDeleted(false);
         return memberRepository.save(member);
     }
 

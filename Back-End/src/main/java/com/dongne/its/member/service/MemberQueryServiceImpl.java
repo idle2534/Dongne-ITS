@@ -1,6 +1,7 @@
 package com.dongne.its.member.service;
 
 import com.dongne.its.member.domain.Member;
+import com.dongne.its.member.domain.enums.Role;
 import com.dongne.its.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,11 +26,11 @@ public class MemberQueryServiceImpl implements  MemberQueryService{
 
     @Override
     public List<Member> findMembersByProjectId(Long projectId) {
-        return memberRepository.findByProjectId(projectId);
+        return memberRepository.findMembersByProjectId(projectId);
     }
 
     @Override
     public List<Member> findMembersByProjectIdAndRole(Long projectId, String role) {
-        return memberRepository.findByProjectIdAndRole(projectId, role);
+        return memberRepository.findMembersByProjectIdAndRole(projectId, Role.valueOf(role));
     }
 }
