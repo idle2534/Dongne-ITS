@@ -61,20 +61,7 @@ export const CreateProject = ({ onClose }: { onClose: () => void }) => {
       return;
     }
 
-    var flag = false;
-    members.map((id, index) => {
-      const user = users.find((user) => user.id === id);
-      
-      if (!user){
-        setMessage("예기치 않은 오류가 발생했습니다.");
-        return;
-      }
-
-      if (user.role === "PL"){
-        flag = true;
-      }
-    });
-    if (!flag){
+    if (!includePl.current){
       setMessage("프로젝트 리더가 존재하지 않습니다.");
       return;
     }
@@ -85,15 +72,22 @@ export const CreateProject = ({ onClose }: { onClose: () => void }) => {
   };
 
   const handleSelectChange = (value: number | string) => {
+    let flag = false;
     if (
       options
         .find((option) => `${option.value}` === value)
         ?.label.includes("PL")
-    )
+    ){
       includePl.current = true;
+      flag = true;
+    }
+
     if (members.findIndex((member) => `${member}` === value) === -1) {
       const newMembers = [...members];
-      newMembers.push(`${value}`.match(/\d+/g)!.map(Number)[0]);
+      if (flag)
+        newMembers.unshift(`${value}`.match(/\d+/g)!.map(Number)[0])
+      else
+        newMembers.push(`${value}`.match(/\d+/g)!.map(Number)[0]);
       setMembers(newMembers);
     }
   };
