@@ -29,19 +29,17 @@ public class ApiResponse<T> {
     }
 
     public static <T> ApiResponse<T> of(BaseCode code, T data){
-        return new ApiResponse<>(code.getReasonHttpStatus().getCode(), code.getReasonHttpStatus().getMessage(), getTimestamp(), data);
+        return new ApiResponse<>(code.getReasonHttpStatus().getCode(), code.getReasonHttpStatus().getMessage(), GeneralTimestamp.getTimestamp(), data);
     }
 
     // 실패한 경우 응답 생성
     public static <T> ApiResponse<T> onFailure(BaseErrorCode code, T data){
-        return new ApiResponse<>(code.getReasonHttpStatus().getCode(), code.getReasonHttpStatus().getMessage(), getTimestamp(), data);
+        return new ApiResponse<>(code.getReasonHttpStatus().getCode(), code.getReasonHttpStatus().getMessage(), GeneralTimestamp.getTimestamp(), data);
     }
 
     public static <T> ConstraintExceptionDto<T> onException(Integer code, String message, T data){
-        return new ConstraintExceptionDto<>(code, message, getTimestamp(), data);
+        return new ConstraintExceptionDto<>(code, message, GeneralTimestamp.getTimestamp(), data);
     }
 
-    public static String getTimestamp(){
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH/mm/SSS'Z'"));
-    }
+
 }
