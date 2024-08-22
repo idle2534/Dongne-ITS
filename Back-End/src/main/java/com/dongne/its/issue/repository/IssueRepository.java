@@ -24,7 +24,7 @@ public interface IssueRepository extends JpaRepository<Issue, Long> {
   public List<Issue> findTesterByProjectId(@Param("projectId") Long projectId);
 
 //  @Query("select i from Issue i join i.project p join i.assignee r join p.issues pi where r.id = pi.assignee.id and p.id = :projectId")
-@Query("select i from Issue i join i.project p join i.assignee r join p.issues pi where (r.id = pi.assignee.id or r.id = pi.reporter.id) and p.id = :projectId")
+  @Query("select i from Issue i join i.project p join i.assignee r join p.issues pi where (r.id = pi.assignee.id or r.id = pi.reporter.id) and p.id = :projectId")
   public List<Issue> findDevByProjectId(@Param("projectId") Long projectId);
 
   @Query("select i from Issue i, Project p where p.id = :projectId and i.project.id = p.id "
