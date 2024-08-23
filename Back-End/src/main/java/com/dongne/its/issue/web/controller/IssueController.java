@@ -116,7 +116,7 @@ public class IssueController {
   @GetMapping("/issueRecommend")
   public ResponseEntity<List<IssueRecommendResponseDto>> recommend(@RequestHeader("id") Long id, @RequestParam("issueId") Long issueId){
     List<IssueRecommendResponseDto> issues_target = issueQueryService.recommend(issueId);
-    return ApiResponse.onSuccess(IssueConverter.toListIssueRecommendResponseDto(issues_target));
+    return ApiResponse.onSuccess(issues_target);
   }
 
   @GetMapping("/deleteRequest/find")
