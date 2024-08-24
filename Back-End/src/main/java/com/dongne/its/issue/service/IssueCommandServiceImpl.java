@@ -34,6 +34,10 @@ public class IssueCommandServiceImpl implements IssueCommandService{
     issue.setStatus(Status.valueOf(request.getStatus()));
     issue.setPriority(Priority.valueOf(request.getPriority()));
     issue.setCategory(request.getCategory());
+    if (issue.getStatus() == Status.RESOLVED)
+      issue.setFixer(issue.getAssignee());
+    else if (issue.getStatus() == Status.REOPENED)
+      issue.setFixer(null);
     return issueRepository.save(issue);
   }
 
