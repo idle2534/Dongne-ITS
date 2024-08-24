@@ -18,7 +18,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -52,8 +51,6 @@ public class Issue extends BaseEntity {
   @Enumerated(EnumType.STRING)
   private Status status;
 
-//  @Column(columnDefinition = "DATETIME(6)")
-//  private LocalDateTime reportedDate;
   private String reportedDate;
 
   @ManyToOne(fetch = FetchType.LAZY)
@@ -75,7 +72,7 @@ public class Issue extends BaseEntity {
   @Column(length = 50)
   private String category;
 
-  @OneToMany(mappedBy = "issueId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL)
   private List<Comment> comments;
 
   private Boolean isDeleted;

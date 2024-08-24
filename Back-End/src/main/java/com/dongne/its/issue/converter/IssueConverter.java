@@ -58,6 +58,15 @@ public class IssueConverter {
         .build();
   }
 
+  public static List<IssueRecommendResponseDto> toListIssueRecommendResponseDto(List<IssueRecommendResponseDto> recommends){
+    if(recommends == null || recommends.isEmpty()) return null;
+
+    return recommends.stream().map(recommend -> IssueRecommendResponseDto.builder()
+        .issueResponseDto(recommend.getIssueResponseDto())
+        .score(recommend.getScore())
+        .isDeleted(recommend.getIsDeleted())
+        .build()).toList();
+  }
 
   public static Issue toIssue(IssueCreateRequestDto request){
     return Issue.builder()
