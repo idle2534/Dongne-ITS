@@ -94,6 +94,7 @@ export const IssueControl = () => {
       description: issue.description,
       status: issue.status,
       priority: value as Issue.Priority,
+      category: issue.category,
     });
   };
 
@@ -109,6 +110,7 @@ export const IssueControl = () => {
         description: issue.description,
         status: value as Issue.Status,
         priority: issue.priority,
+        category: issue.category
       });
     }
   };
@@ -150,9 +152,8 @@ export const IssueControl = () => {
       </State>
 
       <Date style={{ backgroundColor: "#831717", borderColor: "#831717" }}>{`${
-        issue.fixer
-          ? `해당 이슈는 ${issue.fixer.name}에 의하여 해결되었습니다.`
-          : `해당 이슈는 아직 닫히지 않았습니다.`
+        issue.fixer ? `해당 이슈는 ${issue.fixer.name}에 의하여 해결되었습니다.`
+        : issue.status == "CLOSED" ? `해당 이슈는 닫혔습니다.` : `해당 이슈는 아직 닫히지 않았습니다.`
       }`}</Date>
 
       <Priority>
