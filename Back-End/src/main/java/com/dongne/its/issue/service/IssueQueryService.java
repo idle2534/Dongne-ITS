@@ -7,15 +7,13 @@ import java.util.List;
 
 public interface IssueQueryService {
 
-  void CheckFlag(Integer flag);
-
   Issue findIssueById(Long id);
 
   List<Issue> findIssueByProjectId(Long id);
 
-  List<Issue> findTesterByProjectId(Long id);
+  List<Issue> findTesterByProjectId(Long id, Long projectId);
 
-  List<Issue> findDevByProjectId(Long id);
+  List<Issue> findDevByProjectId(Long id, Long projectId);
 
   List<Issue> search(String category, Long projectId, String keyword);
 

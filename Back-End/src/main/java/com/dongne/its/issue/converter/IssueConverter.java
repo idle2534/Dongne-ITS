@@ -1,11 +1,16 @@
 package com.dongne.its.issue.converter;
 
+import com.dongne.its.comment.converter.CommentConverter;
 import com.dongne.its.issue.domain.Issue;
 import com.dongne.its.issue.web.dto.IssueCreateRequestDto;
 import com.dongne.its.issue.web.dto.IssueRecommendResponseDto;
 import com.dongne.its.issue.web.dto.IssueResponseDto;
 import com.dongne.its.member.converter.MemberConverter;
+
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class IssueConverter {
   public static IssueResponseDto toIssueResponseDto(Issue issue){
@@ -23,12 +28,12 @@ public class IssueConverter {
         .assignee(MemberConverter.toMemberResponseDto(issue.getAssignee()))
         .projectId(issue.getProject() != null ? issue.getProject().getId() : null)
         .category(issue.getCategory())
-//        .comments(CommentConverter.toCommentResponseDto(issue.getComments()))
+        .comments(CommentConverter.toCommentResponseDtoList(issue.getComments()))
         .isDeleted(issue.getIsDeleted())
         .build();
   }
 
-  public static List<IssueResponseDto> toListIssueResponseDto(List<Issue> issues){
+  public static List<IssueResponseDto> toIssueResponseDtoList(List<Issue> issues){
     if(issues == null || issues.isEmpty()) return null;
 
     return issues.stream().map(issue -> IssueResponseDto.builder()
@@ -43,19 +48,21 @@ public class IssueConverter {
         .assignee(MemberConverter.toMemberResponseDto(issue.getAssignee()))
         .projectId(issue.getProject() != null ? issue.getProject().getId() : null)
         .category(issue.getCategory())
-//        .comments(CommentConverter.toCommentResponseDto(issue.getComments()))
+        .comments(CommentConverter.toCommentResponseDtoList(issue.getComments()))
         .isDeleted(issue.getIsDeleted())
         .build()).toList();
   }
 
-  public static IssueRecommendResponseDto toIssueRecommendResponseDto(IssueResponseDto issueResponseDto, Long score){
-    if(issueResponseDto == null) return null;
+  public static List<IssueRecommendResponseDto> toIssueRecommendResponseDtoList(List<Issue> issues, List<Long> scores){
+    if (issues == null || scores == null) return null;
 
-    return IssueRecommendResponseDto.builder()
-        .issueResponseDto(issueResponseDto)
-        .score(score)
-        .isDeleted(false)
-        .build();
+    return IntStream.range(0, issues.size())
+            .mapToObj(i -> IssueRecommendResponseDto.builder()
+                    .issueResponseDto(IssueConverter.toIssueResponseDto(issues.get(i)))
+                    .score(scores.get(i))
+                    .isDeleted(false)
+                    .build())
+            .sorted(Comparator.comparing(IssueRecommendResponseDto::getScore)).limit(3).toList();
   }
 
 
