@@ -11,7 +11,7 @@ public interface MemberCommandService {
 
     public void checkRole(Member member, Role role);
 
-    public void checkPermissoion(Member member, Role role);
+    public void checkPermission(Member member, Role role);
 
     public Member updateRole(MemberRoleUpdateRequestDto request);
 

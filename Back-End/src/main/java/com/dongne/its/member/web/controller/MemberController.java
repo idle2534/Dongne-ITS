@@ -65,18 +65,18 @@ public class MemberController {
     @GetMapping("/account")
     public ResponseEntity<List<MemberResponseDto>> account() {
         List<Member> member_target = memberQueryService.findMembers();
-        return ApiResponse.onSuccess(MemberConverter.toListMemberResponseDto(member_target));
+        return ApiResponse.onSuccess(MemberConverter.toMemberResponseDtoList(member_target));
     }
 
     @GetMapping("/account/project")
     public ResponseEntity<List<MemberResponseDto>> project(@RequestParam("projectId") Long projectId) {
         List<Member> member_target = memberQueryService.findMembersByProjectId(projectId);
-        return ApiResponse.onSuccess(MemberConverter.toListMemberResponseDto(member_target));
+        return ApiResponse.onSuccess(MemberConverter.toMemberResponseDtoList(member_target));
     }
 
     @GetMapping("/account/project/role")
     public ResponseEntity<List<MemberResponseDto>> role(@RequestParam("projectId") Long projectId, @RequestParam("role") String role) {
         List<Member> member_target = memberQueryService.findMembersByProjectIdAndRole(projectId, role);
-        return ApiResponse.onSuccess(MemberConverter.toListMemberResponseDto(member_target));
+        return ApiResponse.onSuccess(MemberConverter.toMemberResponseDtoList(member_target));
     }
 }

@@ -18,22 +18,22 @@ public class ProjectConverter {
         return ProjectResponseDto.builder()
                 .id(project.getId())
                 .name(project.getName())
-                .members(MemberConverter.toListMemberResponseDto(ProjectMemberConverter.toMembers(project.getProjectMembers())))
-                .issues(IssueConverter.toListIssueResponseDto(project.getIssues()))
+                .members(MemberConverter.toMemberResponseDtoList(ProjectMemberConverter.toMembers(project.getProjectMembers())))
+                .issues(IssueConverter.toIssueResponseDtoList(project.getIssues()))
                 .leaderId(project.getLeaderId())
                 .isDeleted(project.getIsDeleted())
                 .build();
     }
 
     // <Project> List 를 <ProjectResponseDto> List 로 변환
-    public static List<ProjectResponseDto> toListProjectResponseDto(List<Project> projects){
+    public static List<ProjectResponseDto> toProjectResponseDtoList(List<Project> projects){
         if (projects == null || projects.isEmpty()) return null;
 
         return projects.stream().map(project -> ProjectResponseDto.builder()
                 .id(project.getId())
                 .name(project.getName())
-                .members(MemberConverter.toListMemberResponseDto(ProjectMemberConverter.toMembers(project.getProjectMembers())))
-                .issues(IssueConverter.toListIssueResponseDto(project.getIssues()))
+                .members(MemberConverter.toMemberResponseDtoList(ProjectMemberConverter.toMembers(project.getProjectMembers())))
+                .issues(IssueConverter.toIssueResponseDtoList(project.getIssues()))
                 .leaderId(project.getLeaderId())
                 .isDeleted(project.getIsDeleted())
                 .build()).toList();

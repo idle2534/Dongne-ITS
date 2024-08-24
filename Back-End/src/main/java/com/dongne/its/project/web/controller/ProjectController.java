@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/project")
 @RequiredArgsConstructor
@@ -28,7 +27,7 @@ public class ProjectController {
     @PutMapping("/{projectId}")
     public ResponseEntity<String> update(@PathVariable("projectId") Long projectId) {
          Project project = projectCommandService.delete(projectId);
-        return ApiResponse.onSuccess("Success");
+        return ApiResponse.onSuccess("Delete Success");
     }
 
     @PutMapping("/{projectId}/member/delete") // 멤버를 삭제한다
@@ -60,6 +59,6 @@ public class ProjectController {
     @GetMapping("")
     public ResponseEntity<List<ProjectResponseDto>> projects() {
         List<Project> projects = projectQueryService.findProjects();
-        return ApiResponse.onSuccess(ProjectConverter.toListProjectResponseDto(projects));
+        return ApiResponse.onSuccess(ProjectConverter.toProjectResponseDtoList(projects));
     }
 }

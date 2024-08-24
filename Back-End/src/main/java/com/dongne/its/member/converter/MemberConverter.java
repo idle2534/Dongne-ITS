@@ -21,7 +21,7 @@ public class MemberConverter {
                 .build();
     }
 
-    public static List<MemberResponseDto> toListMemberResponseDto(List<Member> members){
+    public static List<MemberResponseDto> toMemberResponseDtoList(List<Member> members){
         if(members==null || members.isEmpty()) return null;
 
         return members.stream().map(member -> MemberResponseDto.builder()

@@ -2,7 +2,6 @@ package com.dongne.its.member.service;
 
 import com.dongne.its.base.apiPayload.code.status.ErrorStatus;
 import com.dongne.its.base.apiPayload.exception.handler.GeneralExceptionHandler;
-import com.dongne.its.issue.domain.Issue;
 import com.dongne.its.issue.repository.IssueRepository;
 import com.dongne.its.member.converter.MemberConverter;
 import com.dongne.its.member.domain.Member;
@@ -20,7 +19,6 @@ import org.springframework.stereotype.Service;
 public class MemberCommandServiceImpl implements MemberCommandService {
 
     private final MemberRepository memberRepository;
-    private final IssueRepository issueRepository;
 
     @Override
     public void checkRole(Member member, Role role) {
@@ -29,7 +27,7 @@ public class MemberCommandServiceImpl implements MemberCommandService {
     }
 
     @Override
-    public void checkPermissoion(Member member, Role role) {
+    public void checkPermission(Member member, Role role) {
         if(member.getRole().ordinal() < role.ordinal())
             throw new GeneralExceptionHandler(ErrorStatus.PERMISSION_DENY);
     }
