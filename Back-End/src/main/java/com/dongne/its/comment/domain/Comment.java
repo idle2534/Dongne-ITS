@@ -11,14 +11,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -35,9 +32,8 @@ public class Comment extends BaseEntity {
   private Member writer;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "issueId")
-  private Issue issueId;
+  @JoinColumn(name = "issue_id")
+  private Issue issue;
 
-  @Column()
   private Boolean isDeleted;
 }
