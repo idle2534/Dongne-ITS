@@ -78,7 +78,8 @@ export const IssueService = () => {
     issueId: number;
     description: string;
     status: Issue.Status;
-    priority: Issue.Priority;
+    priority: Issue.Priority
+    category: string;
   }) => {
     const { data } = (await API.put(
       `${URL}/update`,
