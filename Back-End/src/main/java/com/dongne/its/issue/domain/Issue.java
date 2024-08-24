@@ -57,25 +57,25 @@ public class Issue extends BaseEntity {
   private String reportedDate;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "reporterId")
+  @JoinColumn(name = "reporter_id")
   private Member reporter;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "fixerId")
+  @JoinColumn(name = "fixer_id")
   private Member fixer;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "assigneeId")
+  @JoinColumn(name = "assignee_id")
   private Member assignee;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "projectId")
+  @JoinColumn(name = "project_id")
   private Project project;
 
   @Column(length = 50)
   private String category;
 
-  @OneToMany(mappedBy = "issueId", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL)
   private List<Comment> comments;
 
   private Boolean isDeleted;
