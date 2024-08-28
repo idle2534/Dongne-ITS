@@ -8,25 +8,25 @@ export const useProjectStore = create<Project.ProjectStore>()(
     userIssues: [],
 
     setProjects: (projects) => {
-      if (projects) {
-        for (const project of projects) {
-          if (project.issues) {
-            for (const issue of project.issues) {
-              if (!issue.comments)
-                issue.comments = [];
-            }
-          }
-          else {
-            project.issues = [];
-          }
+      // if (projects) {
+      //   for (const project of projects) {
+      //     if (project.issues) {
+      //       for (const issue of project.issues) {
+      //         if (!issue.comments)
+      //           issue.comments = [];
+      //       }
+      //     }
+      //     else {
+      //       project.issues = [];
+      //     }
   
-          if (!project.members)
-            project.members = [];
-        }
-      }
-      else {
-        projects = [];
-      }
+      //     if (!project.members)
+      //       project.members = [];
+      //   }
+      // }
+      // else {
+      //   projects = [];
+      // }
 
       set(() => ({ projects: projects }));
     },
