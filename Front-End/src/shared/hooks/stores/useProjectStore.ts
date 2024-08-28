@@ -8,82 +8,22 @@ export const useProjectStore = create<Project.ProjectStore>()(
     userIssues: [],
 
     setProjects: (projects) => {
-      // if (projects) {
-      //   for (const project of projects) {
-      //     if (project.issues) {
-      //       for (const issue of project.issues) {
-      //         if (!issue.comments)
-      //           issue.comments = [];
-      //       }
-      //     }
-      //     else {
-      //       project.issues = [];
-      //     }
-  
-      //     if (!project.members)
-      //       project.members = [];
-      //   }
-      // }
-      // else {
-      //   projects = [];
-      // }
-
       set(() => ({ projects: projects }));
     },
 
     setProject: (project) => {
-      if (project) {
-        if (project.issues) {
-          for (const issue of project.issues) {
-            if (!issue.comments)
-              issue.comments = [];
-          }
-        }
-        else {
-          project.issues = [];
-        }
-
-        if (!project.members)
-          project.members = [];
-      }
-
       set(() => ({
         project: project,
       }));
     },
 
     setProjectIssues: (data: Issue.Issue[]) => {
-      if (data) {
-        for (const issue of data) {
-          if (!issue.comments)
-            issue.comments = [];
-        }
-      }
-      else {
-        data = [];
-      }
-      
       set((state) => {
         if (state.project) state.project.issues = data;
       });
     },
 
     addProject: (project) => {
-      if (project) {
-        if (project.issues) {
-          for (const issue of project.issues) {
-            if (!issue.comments)
-              issue.comments = [];
-          }
-        }
-        else {
-          project.issues = [];
-        }
-
-        if (!project.members)
-          project.members = [];
-      }
-
       set((state) => {
         state.projects.push(project);
       });
@@ -111,24 +51,12 @@ export const useProjectStore = create<Project.ProjectStore>()(
     },
 
     setUserIssue: (data) => {
-      if (data) {
-        for (const issue of data)
-          if (!issue.comments)
-            issue.comments = [];
-      }
-      else {
-        data = [];
-      }
-      
       set((state) => {
         state.userIssues = data;
       });
     },
 
     addUserIssue: (data) => {
-      if (data && !data.comments)
-        data.comments = [];
-
       set((state) => {
         if (state.project) state.project.issues.push(data);
         state.userIssues.push(data);

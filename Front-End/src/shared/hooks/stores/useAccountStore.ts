@@ -8,9 +8,6 @@ export const useAccountStore = create<User.AccountStore>()(
 
     //Set function
     setAccounts: (accounts) => {
-      if (!accounts)
-        accounts = [];
-
       set(() => ({ accounts: accounts }));
     },
 
