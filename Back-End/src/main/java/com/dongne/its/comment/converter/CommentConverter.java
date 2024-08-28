@@ -5,12 +5,13 @@ import com.dongne.its.comment.web.dto.CommentCreateRequestDto;
 import com.dongne.its.comment.web.dto.CommentResponseDto;
 import com.dongne.its.member.converter.MemberConverter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommentConverter {
 
     public static CommentResponseDto toCommentResponseDto(Comment comment){
-        return CommentResponseDto.builder()
+        return comment == null ? null : CommentResponseDto.builder()
                 .id(comment.getId())
                 .writer(MemberConverter.toMemberResponseDto(comment.getWriter()))
                 .content(comment.getContent())
@@ -19,7 +20,7 @@ public class CommentConverter {
     }
 
     public static List<CommentResponseDto> toCommentResponseDtoList(List<Comment> comments){
-        return comments.stream().map(comment ->
+        return comments == null ? new ArrayList<>() : comments.stream().map(comment ->
             CommentResponseDto.builder()
                 .id(comment.getId())
                 .writer(MemberConverter.toMemberResponseDto(comment.getWriter()))

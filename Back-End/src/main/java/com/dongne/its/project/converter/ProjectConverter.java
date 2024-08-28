@@ -7,15 +7,14 @@ import com.dongne.its.project.domain.Project;
 import com.dongne.its.project.web.dto.ProjectCreateRequestDto;
 import com.dongne.its.project.web.dto.ProjectResponseDto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectConverter {
 
     // Entity 를 ResponseDTO 로 변환
     public static ProjectResponseDto toProjectResponseDto(Project project) {
-        if (project == null) return null;
-
-        return ProjectResponseDto.builder()
+        return project == null ? null : ProjectResponseDto.builder()
                 .id(project.getId())
                 .name(project.getName())
                 .members(MemberConverter.toMemberResponseDtoList(ProjectMemberConverter.toMembers(project.getProjectMembers())))
@@ -27,9 +26,7 @@ public class ProjectConverter {
 
     // <Project> List 를 <ProjectResponseDto> List 로 변환
     public static List<ProjectResponseDto> toProjectResponseDtoList(List<Project> projects){
-        if (projects == null || projects.isEmpty()) return null;
-
-        return projects.stream().map(project -> ProjectResponseDto.builder()
+        return projects == null ? new ArrayList<>() : projects.stream().map(project -> ProjectResponseDto.builder()
                 .id(project.getId())
                 .name(project.getName())
                 .members(MemberConverter.toMemberResponseDtoList(ProjectMemberConverter.toMembers(project.getProjectMembers())))

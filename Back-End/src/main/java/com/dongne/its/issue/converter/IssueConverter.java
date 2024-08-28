@@ -7,6 +7,7 @@ import com.dongne.its.issue.web.dto.IssueRecommendResponseDto;
 import com.dongne.its.issue.web.dto.IssueResponseDto;
 import com.dongne.its.member.converter.MemberConverter;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,9 +15,7 @@ import java.util.stream.IntStream;
 
 public class IssueConverter {
   public static IssueResponseDto toIssueResponseDto(Issue issue){
-    if(issue == null) return null;
-
-    return IssueResponseDto.builder()
+    return issue == null ? null : IssueResponseDto.builder()
         .id(issue.getId())
         .title(issue.getTitle())
         .description(issue.getDescription())
@@ -34,9 +33,7 @@ public class IssueConverter {
   }
 
   public static List<IssueResponseDto> toIssueResponseDtoList(List<Issue> issues){
-    if(issues == null || issues.isEmpty()) return null;
-
-    return issues.stream().map(issue -> IssueResponseDto.builder()
+    return issues == null ? new ArrayList<>() : issues.stream().map(issue -> IssueResponseDto.builder()
         .id(issue.getId())
         .title(issue.getTitle())
         .description(issue.getDescription())
@@ -54,9 +51,7 @@ public class IssueConverter {
   }
 
   public static List<IssueRecommendResponseDto> toIssueRecommendResponseDtoList(List<Issue> issues, List<Long> scores){
-    if (issues == null || scores == null) return null;
-
-    return IntStream.range(0, issues.size())
+    return issues == null || scores == null ? new ArrayList<>() : IntStream.range(0, issues.size())
             .mapToObj(i -> IssueRecommendResponseDto.builder()
                     .issueResponseDto(IssueConverter.toIssueResponseDto(issues.get(i)))
                     .score(scores.get(i))
@@ -73,5 +68,4 @@ public class IssueConverter {
         .category(request.getCategory())
         .build();
   }
-
 }

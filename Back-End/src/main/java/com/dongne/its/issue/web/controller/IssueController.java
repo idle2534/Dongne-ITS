@@ -2,14 +2,12 @@ package com.dongne.its.issue.web.controller;
 
 import com.dongne.its.base.apiPayload.code.ApiResponse;
 import com.dongne.its.issue.converter.IssueConverter;
-import com.dongne.its.issue.converter.IssueErrorConverter;
 import com.dongne.its.issue.domain.Issue;
 import com.dongne.its.issue.service.IssueCommandService;
 import com.dongne.its.issue.service.IssueQueryService;
 import com.dongne.its.issue.web.dto.IssueAssignRequestDto;
 import com.dongne.its.issue.web.dto.IssueCreateRequestDto;
 import com.dongne.its.issue.web.dto.IssueDeleteRequestDto;
-import com.dongne.its.issue.web.dto.IssueExceptionDto;
 import com.dongne.its.issue.web.dto.IssueRecommendResponseDto;
 import com.dongne.its.issue.web.dto.IssueResponseDto;
 import com.dongne.its.issue.web.dto.IssueStatusUpdateRequestDto;
